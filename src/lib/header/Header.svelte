@@ -1,14 +1,20 @@
 <script>
-	import { page } from '$app/stores';
-	import logo from './svelte-logo.svg';
+		import { page } from '$app/stores';
+
+		import { store as authStore, logout } from '../auth';
+
+		$: auth = $authStore;
+
+		function handleLogout() {
+			logout();
+	}
+
 </script>
 
+
+
 <header>
-	<div class="corner">
-		<a href="https://kit.svelte.dev">
-			<img src={logo} alt="SvelteKit" />
-		</a>
-	</div>
+
 
 	<nav>
 		<svg viewBox="0 0 2 3" aria-hidden="true">
@@ -16,43 +22,33 @@
 		</svg>
 		<ul>
 			<li class:active={$page.path === '/'}><a sveltekit:prefetch href="/">Home</a></li>
-			<li class:active={$page.path === '/about'}><a sveltekit:prefetch href="/about">About</a></li>
-			<li class:active={$page.path === '/todos'}><a sveltekit:prefetch href="/todos">Todos</a></li>
+			<li class:active={$page.path === '/explore'}><a sveltekit:prefetch href="/explore">Explore</a></li>
+			{#if auth && auth.user.email}
+				<li class:active={$page.path === '/[user]'}><a  sveltekit:prefetch href="/{auth.user.email}">Profile</a></li>
+				<li class:active={$page.path === '/auth'}>
+					<a href="javascript:void(0)" on:click|preventDefault={handleLogout}>Logout</a>
+				</li>
+			{:else}
+				<li class:active={$page.path === '/auth'}><a href="/auth">Login</a></li>
+			{/if}
 		</ul>
 		<svg viewBox="0 0 2 3" aria-hidden="true">
 			<path d="M0,0 L0,3 C0.5,3 0.5,3 1,2 L2,0 Z" />
 		</svg>
 	</nav>
 
-	<div class="corner">
-		<!-- TODO put something else here? github link? -->
-	</div>
+
 </header>
 
 <style>
 	header {
 		display: flex;
-		justify-content: space-between;
+		justify-content: space-around;
 	}
 
-	.corner {
-		width: 3em;
-		height: 3em;
-	}
 
-	.corner a {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		width: 100%;
-		height: 100%;
-	}
 
-	.corner img {
-		width: 2em;
-		height: 2em;
-		object-fit: contain;
-	}
+
 
 	nav {
 		display: flex;
@@ -109,7 +105,7 @@
 		font-weight: 700;
 		font-size: 0.8rem;
 		text-transform: uppercase;
-		letter-spacing: 10%;
+		letter-spacing: 2px;
 		text-decoration: none;
 		transition: color 0.2s linear;
 	}

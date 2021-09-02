@@ -1,6 +1,24 @@
+<script context="module">
+	import { store as authStore } from '$lib/auth';
+	export async function load({ fetch }) {
+		const res = await fetch('/api/auth/user');
+		const { user } = await res.json();
+		authStore.set({
+			loading: false,
+			user
+		});
+		return {
+			status: 200,
+			context: {
+				user
+			}
+		}
+	}
+</script>
 <script>
 	import Header from '$lib/header/Header.svelte';
 	import '../app.css';
+
 </script>
 
 <Header />
@@ -10,7 +28,7 @@
 </main>
 
 <footer>
-	<p>visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to learn SvelteKit</p>
+	<p>Made by <a href="https://will-macneil.now.sh">Will</a> </p>
 </footer>
 
 <style>
