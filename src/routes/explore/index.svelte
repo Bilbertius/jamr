@@ -23,11 +23,13 @@
 </script>
 
 <script>
-
+  import Protected from '$lib/Protected.svelte';
+  import AuthForm from '$lib/AuthForm.svelte';
   import  AddAlbum  from './_AddAlbum.svelte';
   import AddSong from './_AddSong.svelte';
   import BandNav from './_BandNav.svelte';
-  let user = getContext('store');
+  export let user;
+
 
 
   export let bands = [];
@@ -120,11 +122,12 @@
   <title>Explore</title>
 </svelte:head>
 
+<Protected>
+  <AuthForm slot="unauthorized"/>
 <div id="explore">
   <ul>
   {#each bands as band (band.id)}
     <h4><BandNav {band} /></h4>
-
       <ul id="album">
         {#each band.albums as album }
           <li id="album-li">
@@ -147,3 +150,4 @@
   </ul>
   <AddAlbum {bands} />
 </div>
+</Protected>

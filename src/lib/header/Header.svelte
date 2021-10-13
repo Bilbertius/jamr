@@ -23,8 +23,14 @@
 		<ul>
 			<li class:active={$page.path === '/'}><a sveltekit:prefetch href="/">Home</a></li>
 			<li class:active={$page.path === '/explore'}><a sveltekit:prefetch href="/explore">Explore</a></li>
-			{#if auth && auth.user.email}
-				<li class:active={$page.path === '/[user]'}><a  sveltekit:prefetch href="/{auth.user.email}">Profile</a></li>
+
+
+			{#if auth && auth.user}
+				<li class:active={$page.path === "/{auth.user.email}"}>
+					<a sveltekit:prefetch href="/{auth.user.email}">
+						Profile
+					</a>
+				</li>
 				<li class:active={$page.path === '/auth'}>
 					<a href="javascript:void(0)" on:click|preventDefault={handleLogout}>Logout</a>
 				</li>
@@ -51,9 +57,9 @@
 
 
 	nav {
-		display: flex;
+		display:         flex;
 		justify-content: center;
-		--background: rgba(255, 255, 255, 0.7);
+		--background:    hsla(0, 40%, 100%, 0.7);
 	}
 
 	svg {

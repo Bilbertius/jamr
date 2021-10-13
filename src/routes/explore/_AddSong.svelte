@@ -3,6 +3,7 @@
 
 </script>
 <script>
+
   export let bandId;
   export let albumId;
   export let show;

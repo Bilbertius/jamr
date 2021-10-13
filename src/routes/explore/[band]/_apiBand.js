@@ -41,8 +41,7 @@ export async function apiBand(request, resource, data) {
           },
           shows: {
             select: {
-              venue : true,
-              date: true,
+              info: true,
 
             }
           }
