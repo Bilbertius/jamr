@@ -6,12 +6,12 @@ export async function apiUser(request, resource, data) {
 
 	let body = {};
 	let status = 400;
-	console.log(request)
+	console.log(request);
 	switch (request.method.toUpperCase()) {
 		case "DELETE":
 			await prisma.userProfile.delete({
 				where: {
-					email: resource.split("/").pop()
+					id: resource.split("/").pop()
 				}
 			});
 			status = 200;
@@ -19,7 +19,7 @@ export async function apiUser(request, resource, data) {
 		case "GET":
 			body = await prisma.userProfile.findFirst({
 				where : {
-					email: request.params.user,
+					email: request.locals.user.issuer
 				},
 				select: {
 					id:true,
@@ -34,12 +34,18 @@ export async function apiUser(request, resource, data) {
 		case "POST":
 			body = await prisma.userProfile.create({
 				data: {
+					id: data.id,
 					username: data.username,
 					email: data.email
+				},
+				select: {
+					id:true,
+					username: true,
+					email:true
 				}
 			})
-			console.log(body)
-
+			status = 200;
+			break;
 	}
 
 	if (request.method !== "GET" && request.headers.accept !== "application/json") {

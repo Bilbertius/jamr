@@ -18,9 +18,11 @@ export const get = async (request) => {
 
 
 export const post = async (request) => {
-	const response = await api(request, `shows/`, {
+	const {band} = request.params;
 
-		song: request.body.get('song')
+	const response = await apiShow(request, `/${band}`, {
+
+		comment: request.body.get('comment')
 	});
 
 	return response;

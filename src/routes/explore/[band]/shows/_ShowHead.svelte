@@ -1,9 +1,9 @@
 <script>
-    import { store as authStore } from '$lib/auth';
+
+    import JamNav from './_JamNav.svelte';
 
 
-    $ : auth = authStore;
-    export let show;
+    export let show, band;
     let hide = true;
 
 
@@ -16,20 +16,20 @@
 
 <li>
     <div>
-
         <h3>
             {show.info}
         </h3>
-        <button on:click={showJams}>V</button>
+        <button on:click={showJams}>v</button>
     </div>
     {#if hide === false}
         <ul>
-            {#each show.jams as jam }
+            {#each show.jams as jam}
                 <li>
                     <div>
                         <h5>
-                            {jam.song.name}
+                            <JamNav {jam}/>
                         </h5>
+
                     </div>
                 </li>
             {/each}
@@ -40,7 +40,10 @@
 <style>
     li {
         color:         white;
-        box-shadow:    1px 1px 1px 1px hsla(0, 0%, 10%, 0.7), -1px -1px 1px 0px hsla(0, 0%, 50%, 0.7), inset 0px -1px 0px 0px hsla(0, 0%, 10%, 0.7), inset 0px 1px 0px 0px hsla(0, 0%, 40%, 0.7);
+        box-shadow:    1px 1px 1px 1px hsla(0, 0%, 10%, 0.7),
+                       -1px -1px 1px 0 hsla(0, 0%, 50%, 0.7),
+                       inset 0 -1px 0 0 hsla(0, 0%, 10%, 0.7),
+                       inset 0 1px 0 0 hsla(0, 0%, 40%, 0.7);
         margin:        8px auto;
         padding:       15px 15px;
         border-radius: 15px;
@@ -59,7 +62,10 @@
         color:            aquamarine;
         border:           none;
         background-color: inherit;
-        box-shadow:       1px 1px 1px 1px hsla(0, 0%, 10%, 0.7), -1px -1px 1px 0px hsla(0, 0%, 50%, 0.7), inset 0px -1px 0px 0px hsla(0, 0%, 10%, 0.7), inset 0px 1px 0px 0px hsla(0, 0%, 40%, 0.7);
+        box-shadow:       1px 1px 1px 1px hsla(0, 0%, 10%, 0.7),
+                          -1px -1px 1px 0 hsla(0, 0%, 50%, 0.7),
+                          inset 0 -1px 0 0 hsla(0, 0%, 10%, 0.7),
+                          inset 0 1px 0 0 hsla(0, 0%, 40%, 0.7);
     }
 
     div {

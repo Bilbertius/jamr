@@ -8,7 +8,8 @@
 
 <nav>
 	<ul>
-		<li class:active={$page.path === `/explore/${band}/shows`}><a sveltekit:prefetch href="/explore/{band}/shows">Shows</a>
+		<li class:active={$page.path === `/explore/${band}/shows`}><a sveltekit:prefetch
+                                                                      href="/explore/{band}/shows">Shows</a>
 		<li class:active={$page.path === `/explore/${band}/albums`}><a sveltekit:prefetch href="/explore/{band}/albums">Albums</a></li>
 	</ul>
 </nav>

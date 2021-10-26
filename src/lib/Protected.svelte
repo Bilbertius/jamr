@@ -1,6 +1,6 @@
 <script>
 	import { store as authStore } from './auth';
-	$: auth = $authStore;
+	$:auth = $authStore;
 </script>
 
 {#if auth.loading}

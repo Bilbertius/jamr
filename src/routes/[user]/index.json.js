@@ -18,6 +18,7 @@ export const post = async (request) => {
 		// request.body is _also_ a (readonly) FormData
 		// object, which allows us to get form data
 		// with the `body.get(key)` method
+		id: request.locals.user.issuer,
 		email: request.body.get('email'),
 		username: request.body.get('username')
 	});

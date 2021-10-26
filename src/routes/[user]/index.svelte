@@ -1,88 +1,101 @@
 <script context='module'>
-	import { enhance } from '$lib/form';
+    import { enhance } from '$lib/form';
 
 
-	export const load = async ({ fetch, page }) => {
-		let { user } = page.params;
-		let res = await fetch(`/${user}.json`);
 
-		if (res.ok) {
-			const data = await res.json();
-			return {
-				props: {
-					user:  {data}
-				}
-			};
-		}
-		const { message } = await res.json();
-		return {
-			error: new Error(message)
-		};
-	};
+    export const load = async ({ fetch, page }) => {
+        let { user } = page.params;
+        let res = await fetch(`/${user}.json`);
+
+        if (res.ok) {
+            const data = await res.json();
+            return {
+                props: {
+                    user: { data }
+                }
+            };
+        }
+        const { message } = await res.json();
+        return {
+            error: new Error(message)
+        };
+    };
 </script>
 
 
 <script>
-	import { goto } from '$app/navigation';
-	import { page } from '$app/stores';
-	import { store } from '$lib/auth';
+
+    import { page } from '$app/stores';
+    import { userStore } from '$lib/userData.js';
 
 
-	export let user = 0;
-	let logged = user.data ? 1 : 0;
-	$: isUser = logged;
+    export let user;
+    $userStore = { ...user };
 
-	$:auth = store;
+    let username = $userStore.username;
+
+    let newUser = {
+        email: $page.params.user,
+        username: ''
+    };
+
+    /*function handleUser() {
+     console.log(`handleUser Running1 : ${newUser.username}`);
+     auth.user = {
+     email: newUser.email,
+     username: newUser.username,
+     ...user
+     }
 
 
-	let newUser = {
-		email: $page.params.user,
-		username: ''
-	};
 
-	function handleUser() {
-
-		auth.update({
-			user: {
-				email: newUser.email,
-				username: newUser.username
-			}
-		});
-		newUser = user;
-		goto('/explore');
-	}
+     goto(`/explore`);
+     }*/
 </script>
 
-{#if isUser }
-	<h1>
-		{user.data.username}
-	</h1>
-{/if}
-{#if !isUser }
-	<h2>Finish Sign Up</h2>
-	<form
-		action='/user.json'
-		method='post'
-		use:enhance={{
+{#if user.data.username || $userStore.username  }
+    <h1>
+        {user.data.username}
+    </h1>
+{:else}
+    <h2>Finish Sign Up</h2>
+    <form
+      action='user.json'
+      method='post'
+      use:enhance={{
 			result: async (res, form) => {
+                const created = await res.json();
+				$userStore = {
+				    id: created.id,
+				    username: created.username,
+				    email: created.email,
+				};
 
 
 				form.reset();
 			}
 		}}
-	>
-		<div>
+    >
+        <div>
 
-			<label for='username'>Username : </label>
-			<input name='username' id='username' type='text' bind:value={newUser.username}>
-		</div>
-		<div>
+            <label for='username'>Username :</label>
+            <input name='username'
+                   id='username'
+                   type='text'
+                   bind:value={newUser.username}>
+        </div>
+        <div>
 
-			<input name='email' id='email' type='hidden' bind:value={newUser.email}>
+            <input name='email'
+                   id='email'
+                   type='hidden'
+                   bind:value={newUser.email}>
 
-		</div>
-		<input id='submit' type='submit' on:click={handleUser}>
-	</form>
+        </div>
+        <input id='submit'
+               type='submit'
+        >
+    </form>
 
 
 {/if}

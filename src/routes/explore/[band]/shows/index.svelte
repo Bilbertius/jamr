@@ -3,7 +3,7 @@
 
 		let band = page.params.band;
 		const res = await fetch(`/explore/${band}/shows.json`).then((res) => res.json())
-		console.log(res);
+
 
 			return {
 				props: { band : res}
@@ -22,13 +22,13 @@
 
 <ul>
 	{#each band.shows as show (show.id)}
-		<ShowHead {show}/>
+		<ShowHead {show} band={band.name}/>
 	{/each}
 </ul>
 
 <style>
 	ul {
-			list-style-type: none;
+        list-style-type: none;
 	}
 
 

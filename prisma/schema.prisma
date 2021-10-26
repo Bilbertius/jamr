@@ -10,6 +10,10 @@ generator client {
   provider =        "prisma-client-js"
 }
 
+generator docs {
+  provider = "node node_modules/prisma-docs-generator"
+}
+
 enum Role {
     USER
     ADMIN
@@ -17,38 +21,34 @@ enum Role {
 
 
 model UserProfile {
-    id              String       @id @default(cuid())
-    created_at      DateTime     @default(now())
-    username        String       @unique
-    email           String       @unique
+    id                  String       @id @default(cuid())
+    created_at          DateTime     @default(now())
+    username            String       @unique
+    email               String       @unique
+    role                Role         @default(USER)
+    votes               Vote[]
+    comments            Comment[]
 
-
-    role            Role         @default(USER)
-    votes           Vote[]
-    comments        Comment[]
-    token           String?
     }
 
 model Musician {
-    id              String      @id @default(cuid())
-    first_name      String
-    last_name       String?
-    stage_name      String?
-    band            Band?       @relation(fields: [bandId], references: [id])
-    bandId          String?
-
-
+    id                  String      @id @default(cuid())
+    first_name          String
+    last_name           String?
+    stage_name          String?
+    band                Band?       @relation(fields: [bandId], references: [id])
+    bandId              String?
  }
 
 model Band {
-    id              String          @id @default(cuid())
-    name            String          @unique
-    date_founded    DateTime?
-    musicians       Musician[]
-    albums          Album[]
-    songs           Song[]
-    shows           Show[]
-    image_url       String          @default("")
+    id                  String          @id @default(cuid())
+    name                String          @unique
+    date_founded        DateTime?
+    musicians           Musician[]
+    albums              Album[]
+    songs               Song[]
+    shows               Show[]
+    image_url           String          @default("")
 }
 
 model Album {
@@ -99,14 +99,20 @@ model Vote {
     userId              String
     jam                 Jam              @relation(fields: [jamId], references: [id])
     jamId               String
-
+    rating              Int
 }
+
 
 model Comment {
-    id              String    @id @default(cuid())
-    user            UserProfile      @relation(fields: [userId], references: [id])
-    userId          String
-    jam             Jam       @relation(fields: [jamId], references: [id])
-    jamId           String
-    text            String
+    id                  String              @id @default(cuid())
+    date_posted         DateTime            @default(now())
+    user                UserProfile         @relation(fields: [userId], references: [id])
+    userId              String
+    jam                 Jam                 @relation(fields: [jamId], references: [id])
+    jamId               String
+    text                String
+
+
+
 }
+

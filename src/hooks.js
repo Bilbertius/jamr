@@ -9,12 +9,9 @@ export const handle = async ({ request, resolve }) => {
 	const user = await getSession(cookies[SESSION_NAME]);
 	request.locals.user = user;
 
-	// TODO https://github.com/sveltejs/kit/issues/1046
 	if (request.query.has('_method')) {
 		request.method = request.query.get('_method').toUpperCase();
 	}
-
 	const response = await resolve(request);
-
 	return response;
 };

@@ -7,6 +7,8 @@ const c = [
 	() => import("../../../src/routes/explore/[band]/index.svelte"),
 	() => import("../../../src/routes/explore/[band]/albums/index.svelte"),
 	() => import("../../../src/routes/explore/[band]/shows/index.svelte"),
+	() => import("../../../src/routes/explore/[band]/shows/jams/[jam].svelte"),
+	() => import("../../../src/routes/explore/[band]/songs/[song].svelte"),
 	() => import("../../../src/routes/todos/index.svelte"),
 	() => import("../../../src/routes/auth.svelte"),
 	() => import("../../../src/routes/[user]/index.svelte")
@@ -42,17 +44,29 @@ export const routes = [
 	// src/routes/explore/[band]/shows/index.svelte
 	[/^\/explore\/([^/]+?)\/shows\/?$/, [c[0], c[4], c[7]], [c[1]], (m) => ({ band: d(m[1])})],
 
+	// src/routes/explore/[band]/shows/jams/[jam].json.js
+	[/^\/explore\/([^/]+?)\/shows\/jams\/([^/]+?)\.json$/],
+
+	// src/routes/explore/[band]/shows/jams/[jam].svelte
+	[/^\/explore\/([^/]+?)\/shows\/jams\/([^/]+?)\/?$/, [c[0], c[4], c[8]], [c[1]], (m) => ({ band: d(m[1]), jam: d(m[2])})],
+
+	// src/routes/explore/[band]/songs/[song].json.js
+	[/^\/explore\/([^/]+?)\/songs\/([^/]+?)\.json$/],
+
+	// src/routes/explore/[band]/songs/[song].svelte
+	[/^\/explore\/([^/]+?)\/songs\/([^/]+?)\/?$/, [c[0], c[4], c[9]], [c[1]], (m) => ({ band: d(m[1]), song: d(m[2])})],
+
 	// src/routes/todos/index.json.js
 	[/^\/todos\.json$/],
 
 	// src/routes/todos/index.svelte
-	[/^\/todos\/?$/, [c[0], c[8]], [c[1]]],
+	[/^\/todos\/?$/, [c[0], c[10]], [c[1]]],
 
 	// src/routes/todos/[uid].json.js
 	[/^\/todos\/([^/]+?)\.json$/],
 
 	// src/routes/auth.svelte
-	[/^\/auth\/?$/, [c[0], c[9]], [c[1]]],
+	[/^\/auth\/?$/, [c[0], c[11]], [c[1]]],
 
 	// src/routes/api/batch/data.js
 	[/^\/api\/batch\/data\/?$/],
@@ -70,7 +84,7 @@ export const routes = [
 	[/^\/([^/]+?)\.json$/],
 
 	// src/routes/[user]/index.svelte
-	[/^\/([^/]+?)\/?$/, [c[0], c[10]], [c[1]], (m) => ({ user: d(m[1])})]
+	[/^\/([^/]+?)\/?$/, [c[0], c[12]], [c[1]], (m) => ({ user: d(m[1])})]
 ];
 
 // we import the root layout/error components eagerly, so that

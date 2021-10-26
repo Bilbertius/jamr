@@ -19,7 +19,7 @@
 
 	{#if hide}
 		<ul>
-			{#each album.songs as song (song.id)}
+			{#each album.songs as song }
 				<SongHead {song} />
 			{/each}
 		</ul>

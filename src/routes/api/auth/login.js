@@ -16,10 +16,11 @@ export async function post(req) {
 			},
 			body: {
 				user: metadata
+
 			}
 		};
 	} catch (err) {
-		console.log(err);
+
 		return {
 			status: 500,
 			body: {
