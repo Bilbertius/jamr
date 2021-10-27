@@ -9,6 +9,7 @@
 
         if (res.ok) {
             const data = await res.json();
+            console.log(data);
             return {
                 props: {
                     user: { data }
@@ -33,27 +34,16 @@
     $userStore = { ...user };
 
     let username = $userStore.username;
-
+let isLogged = false;
     let newUser = {
         email: $page.params.user,
         username: ''
     };
 
-    /*function handleUser() {
-     console.log(`handleUser Running1 : ${newUser.username}`);
-     auth.user = {
-     email: newUser.email,
-     username: newUser.username,
-     ...user
-     }
 
-
-
-     goto(`/explore`);
-     }*/
 </script>
 
-{#if user.data.username || $userStore.username  }
+{#if isLogged  }
     <h1>
         {user.data.username}
     </h1>
@@ -70,7 +60,7 @@
 				    username: created.username,
 				    email: created.email,
 				};
-
+                isLogged = true;
 
 				form.reset();
 			}

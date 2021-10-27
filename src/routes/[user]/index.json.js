@@ -3,7 +3,7 @@ import { apiUser } from './_apiUser.js';
 
 
 export const get = async (request) => {
-	const email = request.params.user;
+	const { email } = request.params.user;
 	const res = await apiUser(request, `/${email}`)
 	if (res.status === 200) {
 

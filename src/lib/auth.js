@@ -4,8 +4,10 @@ import { goto } from '$app/navigation';
 
 let magic;
 
-
-export const store = writable({});
+export const store = writable({
+	loading: false,
+	user: null
+});
 
 function createMagic() {
 	magic = magic || new Magic(import.meta.env.VITE_MAGIC_PUBLIC_KEY);

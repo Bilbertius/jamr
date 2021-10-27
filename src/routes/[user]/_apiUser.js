@@ -19,13 +19,13 @@ export async function apiUser(request, resource, data) {
 		case "GET":
 			body = await prisma.userProfile.findFirst({
 				where : {
-					email: request.locals.user.issuer
+					email: request.locals.user.email
 				},
 				select: {
 					id:true,
 					email: true,
 					username: true
-								}
+				}
 			});
 
 			status = 200;
@@ -34,7 +34,7 @@ export async function apiUser(request, resource, data) {
 		case "POST":
 			body = await prisma.userProfile.create({
 				data: {
-					id: data.id,
+					id: request.locals.user.issuer,
 					username: data.username,
 					email: data.email
 				},
@@ -63,4 +63,4 @@ export async function apiUser(request, resource, data) {
 		};
 	}
 
-};
+}
