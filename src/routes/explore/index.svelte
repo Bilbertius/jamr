@@ -47,9 +47,9 @@
 <style>
     #explore {
         background-color: hsl(150, 0%, 25%);
-        box-shadow:       5px 5px 22px 0px hsla(0, 0%, 10%, 0.7), -5px -5px 22px 0px hsla(0, 0%, 50%, 0.7), inset -2px -2px 8px 0px hsla(0, 0%, 10%, 0.7), inset 2px 2px 8px 0px hsla(0, 0%, 50%, 0.7);
+        box-shadow:       5px 5px 22px 0 hsla(0, 0%, 10%, 0.7), -5px -5px 22px 0px hsla(0, 0%, 50%, 0.7), inset -2px -2px 8px 0px hsla(0, 0%, 10%, 0.7), inset 2px 2px 8px 0px hsla(0, 0%, 50%, 0.7);
 
-        margin:           15px;
+        margin:           165px 20px;
         padding:          2vh 2vw;
         border-radius:    15px;
 

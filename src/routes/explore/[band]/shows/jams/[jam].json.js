@@ -16,10 +16,10 @@ export const post = async (request) => {
 		// request.body is _also_ a (readonly) FormData
 		// object, which allows us to get form data
 		// with the `body.get(key)` method
-		userid: request.body.get('userid'),
+		userid: request.locals.user.issuer,
 		text: request.body.get('text')
 	});
-
+	console.log(response);
 	return response;
 };
 

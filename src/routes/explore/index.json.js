@@ -1,6 +1,6 @@
 import { api } from './_api';
 
-export const get= async (request) => {
+export const get = async (request) => {
 	const response = await api(request, `explore`);
 
 	if (response.status === 404) {

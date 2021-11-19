@@ -9,7 +9,7 @@
 
         if (res.ok) {
             const data = await res.json();
-            console.log(data);
+
             return {
                 props: {
                     user: { data }
@@ -18,23 +18,24 @@
         }
         const { message } = await res.json();
         return {
-            error: new Error(message)
+            error : new Error(message)
         };
     };
 </script>
 
 
 <script>
-
+    import { goto } from '$app/navigation';
     import { page } from '$app/stores';
     import { userStore } from '$lib/userData.js';
+    import { store as authStore } from '$lib/auth.js';
 
 
-    export let user;
-    $userStore = { ...user };
+    export let user = {};
+    $userStore = { ...user.data };
+    $:data = $userStore;
 
-    let username = $userStore.username;
-let isLogged = false;
+    let isLogged = false;
     let newUser = {
         email: $page.params.user,
         username: ''
@@ -43,24 +44,42 @@ let isLogged = false;
 
 </script>
 
-{#if isLogged  }
+{#if data  }
     <h1>
-        {user.data.username}
+        {data.username}
     </h1>
-{:else}
+    {#if data.comments.length === 0}
+        <h1>No comments yet</h1>
+    {:else}
+        <ul>
+            {#each data.comments as comment}
+                <li>{comment.text}</li>
+            {/each}
+        </ul>
+
+
+    {/if}
+    {#if data.votes.length === 0}
+        <h1>No ratings yet</h1>
+    {/if}
+
+{/if}
+{#if !data }
     <h2>Finish Sign Up</h2>
     <form
-      action='user.json'
+      action='/user.json'
       method='post'
       use:enhance={{
 			result: async (res, form) => {
                 const created = await res.json();
+
 				$userStore = {
 				    id: created.id,
 				    username: created.username,
 				    email: created.email,
+				    comments: [],
+				    votes: []
 				};
-                isLogged = true;
 
 				form.reset();
 			}
@@ -96,14 +115,22 @@ let isLogged = false;
         flex-direction:  column;
         justify-content: flex-start;
         align-items:     flex-start;
-        width:           50%;
+
         border:          1px solid white;
         padding:         15px;
 
     }
 
     h1, h2 {
+        margin-top: 150px;
         color: #e3e6f1;
+    }
+    ul {
+        list-style-type: none;
+    }
+    li{
+        color: #e7edf3;
+        font-size: 1.2rem;
     }
 
     label {

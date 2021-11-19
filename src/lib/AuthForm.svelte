@@ -23,7 +23,7 @@
 	<form on:submit|preventDefault={login}>
 		<label for="email">Email</label>
 		<input id="email" bind:value={email} />
-		<div class="btn-container">
+		<div id="btn-container">
 			<button type="submit">Login</button>
 		</div>
 	</form>
@@ -34,8 +34,11 @@
         width: 100%;
         max-width: var(--column-width);
         margin: var(--column-margin-top) auto 0 auto;
+
     }
     form {
+        display: flex;
+        flex-flow: column;
         width: 28rem;
         margin: auto;
         font-size: 1.5rem;
@@ -43,8 +46,10 @@
     label {
         display: block;
         font-weight: bold;
+        color: var(--accent-color);
         margin-bottom: 0.25rem;
     }
+
     input {
         margin-bottom: 0.75rem;
         width: 100%;
@@ -63,7 +68,7 @@
         cursor: pointer;
     }
     button:hover {
-        background-color: blue;
+        background-color: #64649d;
     }
 </style>
 

@@ -4,7 +4,7 @@
 
 </script>
 
-<a sveltekit:prefetch href="explore/{band.name}">{band.name}</a>
+<a sveltekit:prefetch href="/explore/{band.name}">{band.name}</a>
 
 <style>
   a {

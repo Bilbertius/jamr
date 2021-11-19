@@ -100,6 +100,8 @@ model Vote {
     jam                 Jam              @relation(fields: [jamId], references: [id])
     jamId               String
     rating              Int
+
+    @@unique([userId, jamId])
 }
 
 

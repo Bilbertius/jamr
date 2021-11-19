@@ -19,17 +19,24 @@ export async function apiJam(request, resource, data) {
                     id: true,
                     song: true,
                     show: true,
-                    votes: true,
+                    votes: {
+                        select: {
+                            rating: true,
+                            user: true,
+                            jam: true
+                        }
+                    },
                     comments: {
                         select: {
                             text: true,
                             user: true,
                             date_posted: true
-
+                        },
+                        orderBy: {
+                            date_posted: 'desc'
                         }
                     }
                 }
-
             });
             status = 200;
             break;
@@ -48,7 +55,7 @@ export async function apiJam(request, resource, data) {
                     date_posted: true
                 }
 
-            })
+            });
 
             status = 201;
             break;

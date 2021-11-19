@@ -1,13 +1,14 @@
 <script>
     import { enhance } from '$lib/form';
     import { writable } from 'svelte/store';
+    import UserLink from '$lib/UserLink.svelte';
 
 
     export let jam;
     let commentStore = writable([]);
 
     let { id, song, show, votes, comments } = jam;
-    $commentStore = comments.reverse();
+    $commentStore = comments;
 
 
 </script>
@@ -20,18 +21,23 @@
   use:enhance={{
 			result: async (res, form) => {
 				const comment = await res.json();
-                $commentStore = [comment, ...$commentStore]
-                console.log($commentStore)
+                $commentStore = [comment, ...$commentStore];
+
 				form.reset();
 			}
 		}}
 >
 
     <div class='inputs'>
-        <input type='text'
-               name='text'
-               aria-label='Add comment'
-               placeholder='Add a comment'/>
+        <textarea
+          rows='5'
+          cols='60'
+          name='text'
+          aria-label='Add comment'
+          placeholder='Add a slick comment you dweeb'
+          required
+        >
+        </textarea>
         <input type='submit'>
 
     </div>
@@ -42,31 +48,64 @@
             {#each $commentStore as comment}
                 <div class='comment'>
                     <p> {comment.text}</p>
-                   <span>
+                    <div class='user-info'>
+                        <h3>
 
-                    <h3>
-                        {comment.user.username}
-                    </h3>
-                    <h4>
+                             <UserLink profile={comment.user.username} />
 
-                        {new Date(comment.date_posted).toLocaleString()}
-                    </h4>
-                   </span>
+
+
+
+                        </h3>
+                        <h2>
+                            {new Date(comment.date_posted).toLocaleString()}
+                        </h2>
+                    </div>
                 </div>
             {/each}
         </div>
+    {/if}
+    {#if $commentStore.length === 0}
+        <h1>
+            Be The First To Comment
+        </h1>
     {/if}
 </article>
 
 
 <style>
     span {
-        display: flex;
-        align-items:    flex-start;
+        display:     flex;
+        align-items: flex-start;
     }
+
     form {
         position: relative;
     }
+    article {
+        overflow: scroll;
+        height: 60vh;
+        padding: 40px 30px;
+        box-shadow: inset 6px 6px 6px hsla(0, 0%, 10%, 0.6), inset  -6px -6px 6px hsla(0, 0%, 70%, 0.6);
+        border-radius: 15px;
+    }
+
+    article::-webkit-scrollbar {
+        display: none;
+    }
+
+    article::-webkit-scrollbar-track {
+        visibility: hidden;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    }
+
+    article::-webkit-scrollbar-thumb {
+        background-color: inherit;
+        -webkit-box-shadow: 2px 2px 2px hsla(0, 0%, 20%, 0.6);
+        border-radius: 10px;
+    }
+
+
 
     .comments {
 
@@ -76,13 +115,26 @@
         width:          auto;
         gap:            25px;
 
+
+    }
+
+
+    p {
+        font-size: .8rem;
+        color:     #e5e5e5;
     }
 
     h3 {
-        color:        #1cad84;
+        color:        #48dfb4;
         font-size:    1.2rem;
         margin-right: 10px;
+
     }
+
+    h2 {
+        color: #dfdede;
+    }
+
 
     .comment {
         display:        flex;
@@ -91,41 +143,75 @@
 
         line-height:    2;
         border-radius:  15px;
-        padding:        5px;
-        box-shadow:     3px 3px 10px hsla(180, 1%, 9%, 0.6),
-                        -3px -3px 10px hsla(180, 1%, 69%, 0.6),
-                        inset -2px -3px 2px hsla(180, 1%, 9%, 0.6),
-                        inset 2px 2px 3px hsla(180, 1%, 69%, 0.6);;
+
+        box-shadow:     1px 1px 4px hsla(180, 0%, 10%, 0.6),
+                        -1px -1px 4px hsla(180, 0%, 60%, 0.6),
+                        inset -1px -1px 1px hsla(180, 0%, 10%, 0.6),
+                        inset 1px 1px 1px hsla(180, 0%, 60%, 0.6);;
     }
 
     .comment > p {
-        color: #d0dde9;
+        padding:   5px 25px;
+        color:     #ffffff;
+        font-size: 1.2rem;
 
     }
 
-    form {
-
+    .user-info {
+        padding:                    5px 25px;
+        border-bottom-left-radius:  15px;
+        border-bottom-right-radius: 15px;
+        display:                    flex;
+        width:                      calc(100% - 50px);
+        align-items:                center;
+        background-color:           #6a6a6a;
     }
 
-    .inputs {
+    div.inputs {
         display:        flex;
+
         flex-direction: column;
         gap:            15px;
         align-items:    center;
     }
 
+    textarea::placeholder {
+        color: #e6e6e6;
+    }
+
     input {
         width:            20vw;
         margin-bottom:    0;
+        padding:          15px;
         line-height:      2;
         background-color: inherit;
-        color:            #e7edf3;
+        color:            #e6ecf2;
+        border-radius:    15px;
+
+    }
+
+    textarea {
+        background-color: hsla(180, 0%, 40%, 0.6);
+        box-shadow:       -4px -4px 4px hsla(180, 0%, 10%, 0.6),
+                        4px 4px 4px hsla(180, 0%, 60%, 0.6),
+                        inset 4px 4px 4px hsla(180, 0%, 10%, 0.6),
+                        inset -4px -4px 4px hsla(180, 0%, 60%, 0.6);
+        border-radius:    5px;
+        outline:          none;
+        padding:          5px 15px;
+        color:            #c7c5c5;;
+        border:           none;
+        font-size:        1.2rem;
 
     }
 
     input[type='submit'] {
-        margin:  0 auto 15px;
-        padding: 25px;
-        width:   20vw;
+        margin: 0 auto 15px;
+
+
+    }
+
+    @media screen and (min-width:  800px) {
+
     }
 </style>

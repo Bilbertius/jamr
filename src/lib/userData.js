@@ -8,4 +8,8 @@ export const userStore = writable({
     username: null,
     email: null,
     id: null,
+    votes: [],
+    comments: []
+
 });
+

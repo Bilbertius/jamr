@@ -10,12 +10,13 @@
 	<ul>
 		<li class:active={$page.path === `/explore/${band}/shows`}><a sveltekit:prefetch
                                                                       href="/explore/{band}/shows">Shows</a>
-		<li class:active={$page.path === `/explore/${band}/albums`}><a sveltekit:prefetch href="/explore/{band}/albums">Albums</a></li>
+		<li class:active={$page.path === `/explore/${band}/albums`}><a sveltekit:prefetch
+                                                                      href="/explore/{band}/albums">Albums</a></li>
 	</ul>
 </nav>
-<main>
+<section>
 	<slot></slot>
-</main>
+</section>
 <style>
 	nav {
       display: flex;
@@ -27,7 +28,7 @@
       display: flex;
       justify-content: space-around;
       list-style-type: none;
-      padding-inline-start: 0px;
+      padding-inline-start: 0;
 	}
 	li.active > a {
 			color: white;

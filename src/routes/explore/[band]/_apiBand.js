@@ -107,4 +107,4 @@ export async function apiBand(request, resource, data) {
   };
   }
 
-};
+}

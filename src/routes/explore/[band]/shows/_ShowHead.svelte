@@ -26,10 +26,7 @@
             {#each show.jams as jam}
                 <li>
                     <div>
-                        <h5>
                             <JamNav {jam}/>
-                        </h5>
-
                     </div>
                 </li>
             {/each}
@@ -72,5 +69,6 @@
         display:         flex;
         align-items:     center;
         justify-content: space-between;
+        width: 100%;
     }
 </style>

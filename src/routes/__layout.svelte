@@ -7,7 +7,7 @@
         const { user } = await res.json();
         authStore.set({
             loading: false,
-            ...user
+            user
         });
         return {
             status: 200,
@@ -27,8 +27,6 @@
 
 <main>
     <slot/>
-    /
-
 </main>
 
 <footer>
@@ -43,13 +41,15 @@
         display:        flex;
         flex-direction: column;
         padding:        1rem;
-        width:          100%;
+        width:          100vw;
         max-width:      1024px;
         margin:         0 auto;
         box-sizing:     border-box;
     }
 
     footer {
+        position: fixed;
+        bottom: 0;
         display:         flex;
         flex-direction:  column;
         justify-content: center;

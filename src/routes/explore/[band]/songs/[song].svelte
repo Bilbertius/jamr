@@ -15,7 +15,10 @@
 </script>
 
 <script>
+
     export let song;
+
+
 </script>
 
 
