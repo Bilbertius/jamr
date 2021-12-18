@@ -19,6 +19,7 @@ export async function apiJam(request, resource, data) {
                     id: true,
                     song: true,
                     show: true,
+                    url: true,
                     votes: {
                         select: {
                             rating: true,

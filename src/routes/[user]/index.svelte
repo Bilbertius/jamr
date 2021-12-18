@@ -12,7 +12,7 @@
 
             return {
                 props: {
-                    user: { data }
+                    user: { ...data }
                 }
             };
         }
@@ -31,40 +31,46 @@
     import { store as authStore } from '$lib/auth.js';
 
 
-    export let user = {};
-    $userStore = { ...user.data };
+    export let user;
+    $userStore = { ...user };
     $:data = $userStore;
 
     let isLogged = false;
     let newUser = {
-        email: $page.params.user,
         username: ''
     };
 
 
+
 </script>
 
-{#if data  }
+{#if user.username}
     <h1>
-        {data.username}
+        {user.username}
     </h1>
-    {#if data.comments.length === 0}
-        <h1>No comments yet</h1>
-    {:else}
-        <ul>
-            {#each data.comments as comment}
-                <li>{comment.text}</li>
+    <div>
+
+    <h2>You follow {user.followerOf.length || '0'} users</h2>
+    <h2>You are followed by {user.followedBy.length || '0'} users</h2>
+    </div>
+    <ul>
+        {#if user.comments.length > 0}
+            {#each user.comments as comment}
+                <li>{comment.text} - {comment.jam.show.info}</li>
+
             {/each}
-        </ul>
-
-
-    {/if}
-    {#if data.votes.length === 0}
-        <h1>No ratings yet</h1>
-    {/if}
-
+        {/if}
+    </ul>
 {/if}
-{#if !data }
+
+
+
+
+
+
+
+
+{#if !user.username && !isLogged}
     <h2>Finish Sign Up</h2>
     <form
       action='/user.json'
@@ -78,9 +84,11 @@
 				    username: created.username,
 				    email: created.email,
 				    comments: [],
-				    votes: []
+				    votes: [],
+				    followerOf: [],
+				    followedBy: []
 				};
-
+                isLogged = true;
 				form.reset();
 			}
 		}}
@@ -93,14 +101,7 @@
                    type='text'
                    bind:value={newUser.username}>
         </div>
-        <div>
 
-            <input name='email'
-                   id='email'
-                   type='hidden'
-                   bind:value={newUser.email}>
-
-        </div>
         <input id='submit'
                type='submit'
         >
@@ -121,9 +122,12 @@
 
     }
 
-    h1, h2 {
+    h1 {
         margin-top: 150px;
         color: #e3e6f1;
+    }
+    h2 {
+        color: #7c7d7d;
     }
     ul {
         list-style-type: none;

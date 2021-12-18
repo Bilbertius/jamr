@@ -12,7 +12,7 @@
 <article>
     <div>
         <a sveltekit:prefetch
-           href='/shows/jams/{jam.id}'>
+           href='./shows/jams/{jam.id}'>
             <h2>{jam.song.name}</h2>
         </a>
     </div>

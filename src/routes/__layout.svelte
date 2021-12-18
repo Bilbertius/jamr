@@ -20,50 +20,61 @@
 <script>
     import Header from '$lib/header/Header.svelte';
     import '../app.css';
-
+    import AudioPlayer from '$lib/_AudioPlayer.svelte';
 </script>
+
+
 
 <Header/>
 
 <main>
     <slot/>
+<AudioPlayer />
 </main>
-
 <footer>
     <p>Made by
-        <a href='https://will-macneil.now.sh'>Will</a>
+        <a href='https://will-macneil.now.sh'> Will</a>
     </p>
 </footer>
 
+
 <style>
+
     main {
         flex:           1;
+
         display:        flex;
         flex-direction: column;
-        padding:        1rem;
+        padding-bottom:        3rem;
         width:          100vw;
+        min-height:     calc(100vh - 3em);
         max-width:      1024px;
         margin:         0 auto;
         box-sizing:     border-box;
     }
+    Header, main, footer {
+        flex-shrink: 0;
+    }
 
     footer {
-        position: fixed;
+        position: relative;
         bottom: 0;
+        height: 3rem;
+        width: calc(100vw);
         display:         flex;
-        flex-direction:  column;
+        flex-direction:  row;
         justify-content: center;
         align-items:     center;
-        padding:         40px;
+
     }
 
     footer a {
         font-weight: bold;
     }
 
-    @media (min-width: 480px) {
-        footer {
-            padding: 40px 0;
+    @media (max-width: 480px) {
+        main {
+            padding: 0.2em;
         }
     }
 </style>

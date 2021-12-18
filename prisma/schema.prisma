@@ -10,9 +10,9 @@ generator client {
   provider =        "prisma-client-js"
 }
 
-generator docs {
-  provider = "node node_modules/prisma-docs-generator"
-}
+//generator docs {
+  //provider = "node node_modules/prisma-docs-generator"
+//}
 
 enum Role {
     USER
@@ -28,9 +28,19 @@ model UserProfile {
     role                Role         @default(USER)
     votes               Vote[]
     comments            Comment[]
+    followedBy          Follows[]   @relation("followed")
+    followerOf            Follows[]   @relation("follower")
 
     }
 
+model Follows {
+  follower    UserProfile @relation("follower", fields: [followerId], references: [id])
+  followerId  String
+  followed   UserProfile @relation("followed", fields: [followedUsername], references: [username])
+  followedUsername String
+
+  @@id([followerId, followedUsername])
+}
 model Musician {
     id                  String      @id @default(cuid())
     first_name          String
@@ -78,6 +88,8 @@ model Show {
     band                Band @relation(fields: [bandId], references: [id])
     bandId              String
     jams                Jam[]
+    date                DateTime?
+    location            String?
 
 }
 
@@ -87,9 +99,10 @@ model Jam {
     songId              String
     show                Show        @relation(fields: [showId], references: [id])
     showId              String
+    features            String?
     votes               Vote[]
     comments            Comment[]
-
+    url                 String?      @default("")
 
     }
 
@@ -113,8 +126,6 @@ model Comment {
     jam                 Jam                 @relation(fields: [jamId], references: [id])
     jamId               String
     text                String
-
-
 
 }
 

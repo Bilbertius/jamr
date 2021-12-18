@@ -28,7 +28,7 @@ export async function get(req) {
 			}
 		};
 	} catch (err) {
-		console.log(err);
+
 		return {
 			status: 500,
 			body: {

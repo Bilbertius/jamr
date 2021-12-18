@@ -25,8 +25,8 @@
 <script>
     import Protected from '$lib/Protected.svelte';
     import AuthForm from '$lib/AuthForm.svelte';
-    import AddAlbum from './_AddAlbum.svelte';
-    import AddSong from './_AddSong.svelte';
+
+
     import BandNav from './_BandNav.svelte';
 
 
@@ -47,20 +47,24 @@
 <style>
     #explore {
         background-color: hsl(150, 0%, 25%);
-        box-shadow:       5px 5px 22px 0 hsla(0, 0%, 10%, 0.7), -5px -5px 22px 0px hsla(0, 0%, 50%, 0.7), inset -2px -2px 8px 0px hsla(0, 0%, 10%, 0.7), inset 2px 2px 8px 0px hsla(0, 0%, 50%, 0.7);
+        box-shadow:       3px 3px 3px 0 hsla(0, 0%, 10%, 0.7), -3px -3px 3px 0px hsla(0, 0%, 50%, 0.7), inset -2px
+                          -2px 8px 0px hsla(0, 0%, 10%, 0.7), inset 2px 2px 8px 0px hsla(0, 0%, 50%, 0.7);
 
         margin:           165px 20px;
         padding:          2vh 2vw;
         border-radius:    15px;
 
         width:            auto;
+
+
     }
+
 
     ul {
         list-style-type: none;
 
         color:           white;
-        margin:          10px;
+        margin:          5px;
         padding:         5px;
         border-radius:   6%;
     }
@@ -74,7 +78,7 @@
 
     ul#song > li {
         box-shadow:    1px 1px 1px 1px hsla(0, 0%, 10%, 0.7), -1px -1px 1px 0px hsla(0, 0%, 50%, 0.7), inset 0px -1px 0px 0px hsla(0, 0%, 10%, 0.7), inset 0px 1px 0px 0px hsla(0, 0%, 40%, 0.7);
-        margin:        3px auto;
+        margin:        6px auto;
         padding:       1px 5px;
         border-radius: 15px;
 
@@ -140,10 +144,7 @@
                             <button type='button'
                                     on:click={()=> addSong(album.id)}>+
                             </button>
-                            <AddSong {show}
-                                     {id}
-                                     albumId={album.id}
-                                     bandId={album.bandId}/>
+
                         </li>
                         <ul id='song'>
                             {#each album.songs as song}
@@ -159,6 +160,6 @@
                 </ul>
             {/each}
         </ul>
-        <AddAlbum {bands}/>
+
     </div>
 </Protected>

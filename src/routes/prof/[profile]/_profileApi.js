@@ -10,9 +10,17 @@ export async function apiProfile(request, resource, data) {
 
     switch (request.method.toUpperCase()) {
         case 'DELETE':
-            await prisma.userProfile.delete({
+            await prisma.follows.delete({
                 where: {
-                    email: resource.split('/').pop()
+                    followed: {
+                        connect: {
+                            username:  resource.split('/').pop()
+                        },
+                    }, follower: {
+                        connect : {
+                            id : data.follower,
+                        }
+                    }
                 }
             });
             status = 200;
@@ -20,13 +28,36 @@ export async function apiProfile(request, resource, data) {
         case 'GET':
             body = await prisma.userProfile.findUnique({
                 where: {
-                    username: resource.slice(1)
+                    username:  resource.split('/').pop()
                 },
                 select: {
-                    id: true,
+                    id:true,
                     username: true,
-                    comments: true,
-                    votes: true
+                    comments: {
+                        include: {
+                            jam: {
+                               include : {
+                                   show: true
+                               }
+                            },
+
+                        }
+                    },
+                    votes: {
+                        include: {
+                            jam: {
+                                include: {
+                                    show: true
+
+                                }
+                            },
+
+                        }
+                    },
+                    followerOf: true,
+                    followedBy: true
+
+
                 }
             });
 
@@ -34,16 +65,23 @@ export async function apiProfile(request, resource, data) {
             break;
 
         case 'POST':
-            body = await prisma.userProfile.create({
+            body = await prisma.follows.create({
                 data: {
-                    id: request.locals.user.issuer,
-                    username: data.username,
-                    email: data.email
+                    followed: {
+                        connect: {
+                            username:  resource.split('/').pop()
+
+                        },
+                    }, follower: {
+                        connect : {
+                            id : data.follower,
+                        }
+
+                    }
                 },
-                select: {
-                    id: true,
-                    username: true,
-                    email: true
+                include: {
+                    follower:true,
+                    followed: true
 
                 }
             });

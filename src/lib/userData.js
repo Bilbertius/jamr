@@ -9,7 +9,9 @@ export const userStore = writable({
     email: null,
     id: null,
     votes: [],
-    comments: []
+    comments: [],
+    followerOf: [],
+    followedBy: []
 
 });
 

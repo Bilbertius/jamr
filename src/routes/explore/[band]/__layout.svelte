@@ -27,8 +27,10 @@
 	ul {
       display: flex;
       justify-content: space-around;
+      align-items: flex-start;
       list-style-type: none;
       padding-inline-start: 0;
+
 	}
 	li.active > a {
 			color: white;

@@ -36,8 +36,7 @@
           aria-label='Add comment'
           placeholder='Add a slick comment you dweeb'
           required
-        >
-        </textarea>
+        ></textarea>
         <input type='submit'>
 
     </div>
@@ -50,12 +49,7 @@
                     <p> {comment.text}</p>
                     <div class='user-info'>
                         <h3>
-
                              <UserLink profile={comment.user.username} />
-
-
-
-
                         </h3>
                         <h2>
                             {new Date(comment.date_posted).toLocaleString()}
@@ -192,7 +186,7 @@
 
     textarea {
         background-color: hsla(180, 0%, 40%, 0.6);
-        box-shadow:       -4px -4px 4px hsla(180, 0%, 10%, 0.6),
+        box-shadow:     -4px -4px 4px hsla(180, 0%, 10%, 0.6),
                         4px 4px 4px hsla(180, 0%, 60%, 0.6),
                         inset 4px 4px 4px hsla(180, 0%, 10%, 0.6),
                         inset -4px -4px 4px hsla(180, 0%, 60%, 0.6);
@@ -207,8 +201,10 @@
 
     input[type='submit'] {
         margin: 0 auto 15px;
+    }
 
-
+    h1 {
+        color: #7c7d7d;
     }
 
     @media screen and (min-width:  800px) {

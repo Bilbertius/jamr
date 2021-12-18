@@ -19,21 +19,33 @@
 
     import Comments from './_Comments.svelte';
     import Vote from './_Vote.svelte';
+    import {playerStore} from '$lib/playerStore';
+
     export let jam;
     let jamId = jam.id;
-    let rate = 3;
+
     let votes = jam.votes;
+
+    function play() {
+        $playerStore.url = jam.url;
+    }
 
 </script>
 
 <div>
     <h1>{jam.song.name} | {jam.show.info}</h1>
+
     <Vote {votes} {jamId} />
 
     <Comments {jam} />
+    <button on:click={() => play()}>Play</button>
 </div>
 
 <style>
+    audio {
+        background-color: aquamarine;
+        width: 80%
+    }
     h1  {
         color: white;
         font-size: 2rem;

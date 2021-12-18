@@ -11,15 +11,7 @@
     <title>Home</title>
 </svelte:head>
 
-<section>
-    <h1>
-        Welcome to Appadosio
-    </h1>
 
-
-
-
-</section>
 
 <style>
     section {

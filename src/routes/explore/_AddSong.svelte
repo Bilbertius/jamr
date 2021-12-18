@@ -11,7 +11,7 @@
   let song;
 
   function hide() {
-    show ? !!show : !show;
+    show = !show;
   }
 
 </script>

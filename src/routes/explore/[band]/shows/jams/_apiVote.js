@@ -8,7 +8,7 @@ export async function apiVote(request, resource, data) {
 
     let body = {};
     let status = 400;
-    console.log(request);
+
     switch (request.method.toUpperCase()) {
 
       // *********************** GET *************************//
@@ -29,7 +29,7 @@ export async function apiVote(request, resource, data) {
             body = await prisma.vote.upsert({
                 where: {
                     userId_jamId: {
-                        userId: request.locals.user.issuer ,
+                        userId: request.locals.user.issuer,
                         jamId: request.params.jamId
                     }
                 },

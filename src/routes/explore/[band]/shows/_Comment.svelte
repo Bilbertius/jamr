@@ -1,4 +1,5 @@
 <script>
+        import UserLink from '$lib/UserLink.svelte';
         export let comment;
         let date = new Date(comment.date_posted).toDateString()
 
@@ -11,12 +12,8 @@
         {comment.text}
     </p>
 
-    <p class='meta'>
-
-            {comment.user.username}
-
+    <UserLink profile={comment.user.username} />
         <em>{date}</em>
-    </p>
 
 </article>
 

@@ -12,7 +12,7 @@ export async function apiSong(request, resource, data) {
     let body = {};
     let status = 500;
 
-        console.log('SONG')
+
     switch (request.method.toUpperCase()) {
         case 'GET':
             body = await prisma.song.findUnique({
@@ -25,9 +25,15 @@ export async function apiSong(request, resource, data) {
                     album: true,
                     band: true,
                     jams: {
-                        include: {
+                        select: {
+                            id: true,
+                            url: true,
                             show: true,
-                            votes: true
+                            votes: true,
+                            comments: true,
+
+
+
                         }
                     }
                 }
@@ -63,7 +69,7 @@ export async function apiSong(request, resource, data) {
             }
         };
     }
-    console.log(body);
+
     return {
         status,
         body

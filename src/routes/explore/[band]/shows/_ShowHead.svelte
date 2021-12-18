@@ -19,7 +19,14 @@
         <h3>
             {show.info}
         </h3>
-        <button on:click={showJams}>v</button>
+        <button on:click={showJams}>
+            {#if hide}
+                Show
+            {/if}
+            {#if !hide}
+                Hide
+            {/if}
+        </button>
     </div>
     {#if hide === false}
         <ul>
@@ -54,8 +61,8 @@
 
     button {
         height:           2vh;
-        width:            2vh;
-        border-radius:    50%;
+        width:            6vh;
+        border-radius:    15px;
         color:            aquamarine;
         border:           none;
         background-color: inherit;
