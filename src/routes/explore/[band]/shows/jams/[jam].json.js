@@ -11,6 +11,7 @@ export const get = async (request) => {
 };
 
 export const post = async (request) => {
+
 	const response = await apiJam(request, `jams/${request.params.jam}`, {
 		// because index.svelte posts a FormData object,
 		// request.body is _also_ a (readonly) FormData

@@ -29,7 +29,8 @@ export async function apiUser(request, resource, data) {
 						include: {
 							jam : {
 								include: {
-									show: true
+									show: true,
+									song: true
 								}
 							}
 						}

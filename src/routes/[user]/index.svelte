@@ -48,7 +48,7 @@
     <h1>
         {user.username}
     </h1>
-    <div>
+    <div class='follow'>
 
     <h2>You follow {user.followerOf.length || '0'} users</h2>
     <h2>You are followed by {user.followedBy.length || '0'} users</h2>
@@ -56,7 +56,15 @@
     <ul>
         {#if user.comments.length > 0}
             {#each user.comments as comment}
-                <li>{comment.text} - {comment.jam.show.info}</li>
+                <li><p>
+
+                    {comment.text}
+                </p>
+                    <p class='info'>
+                        {comment.jam.song.name}<br />
+                    {comment.jam.show.info}
+                    </p>
+                </li>
 
             {/each}
         {/if}
@@ -160,5 +168,20 @@
         display:         flex;
         justify-content: space-around;
         align-items:     center
+    }
+    .follow {
+        display:         flex;
+        flex-flow: column wrap;
+        justify-content: space-between;
+    }
+
+    p {
+        color: #e7edf3;
+    }
+
+
+    p.info   {
+        color: #bbbbbb;
+        font-size: .9rem;
     }
 </style>

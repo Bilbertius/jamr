@@ -28,7 +28,11 @@ export async function apiSong(request, resource, data) {
                         select: {
                             id: true,
                             url: true,
-                            show: true,
+                            show: {
+                                select: {
+                                    info: true
+                                }
+                            },
                             votes: true,
                             comments: true,
 

@@ -32,26 +32,24 @@ export async function apiAlbum(request, resource, data) {
                                             show: {
                                                 select: {
                                                     id: true,
-                                                    info: true
+                                                    info: true,
+                                                    date: true
                                                 }
                                             }
                                         }
-                                    },
+                                    }
                                 }
                             }
                         }
                     }
                 }
-            })
-
-
-            ;
+            });
 
             status = 200;
             break;
 
       // *********************** Post *************************//
-        case'POST':
+        case 'POST':
             body = await prisma.show.create({
                 where: {
                     id: data.albumId

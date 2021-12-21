@@ -26,6 +26,7 @@
 <style>
     ul {
         list-style-type: none;
+        min-width: 50vw;
     }
 
 

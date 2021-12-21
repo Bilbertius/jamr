@@ -13,6 +13,7 @@
 
 </script>
 
+<div class='wrapper'>
 
 <form
   class='new'
@@ -66,19 +67,27 @@
     {/if}
 </article>
 
+</div>
 
 <style>
     span {
         display:     flex;
         align-items: flex-start;
     }
-
+    div.wrapper {
+        width: 100vw;
+        display: flex;
+        align-items: center;
+        flex-flow: column;
+    }
     form {
         position: relative;
+        width: auto;
     }
     article {
+
         overflow: scroll;
-        height: 60vh;
+        height: 40vh;
         padding: 40px 30px;
         box-shadow: inset 6px 6px 6px hsla(0, 0%, 10%, 0.6), inset  -6px -6px 6px hsla(0, 0%, 70%, 0.6);
         border-radius: 15px;
@@ -106,7 +115,7 @@
         display:        flex;
         flex-direction: column;
         height:         15vh;
-        width:          auto;
+
         gap:            25px;
 
 
@@ -174,9 +183,9 @@
     }
 
     input {
-        width:            20vw;
+        width:            40vw;
         margin-bottom:    0;
-        padding:          15px;
+        padding:         5px;
         line-height:      2;
         background-color: inherit;
         color:            #e6ecf2;
@@ -197,17 +206,31 @@
         border:           none;
         font-size:        1.2rem;
 
+
     }
 
     input[type='submit'] {
         margin: 0 auto 15px;
+        background-color: hsl(0, 0%, 30%);
     }
-
     h1 {
         color: #7c7d7d;
     }
 
-    @media screen and (min-width:  800px) {
+    @media only screen and (min-width:  800px) {
+        article {
+            width: 80vw;
+        }
+        textarea { width: 80vw;}
+    }
 
+    @media only screen and (max-width: 420px) {
+        h1 {
+            font-size: 1.2rem;
+        }
+        article {
+            width: 300px;
+        }
+        textarea { width:300px;}
     }
 </style>

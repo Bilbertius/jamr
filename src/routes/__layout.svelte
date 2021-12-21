@@ -20,7 +20,7 @@
 <script>
     import Header from '$lib/header/Header.svelte';
     import '../app.css';
-    import AudioPlayer from '$lib/_AudioPlayer.svelte';
+
 </script>
 
 
@@ -29,7 +29,7 @@
 
 <main>
     <slot/>
-<AudioPlayer />
+
 </main>
 <footer>
     <p>Made by
@@ -42,17 +42,17 @@
 
     main {
         flex:           1;
-
         display:        flex;
         flex-direction: column;
-        padding-bottom:        3rem;
+        align-items: center;
+        padding-bottom: 3rem;
         width:          100vw;
         min-height:     calc(100vh - 3em);
-        max-width:      1024px;
+
         margin:         0 auto;
         box-sizing:     border-box;
     }
-    Header, main, footer {
+    Header, footer {
         flex-shrink: 0;
     }
 

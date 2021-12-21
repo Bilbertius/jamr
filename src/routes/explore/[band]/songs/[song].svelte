@@ -18,7 +18,9 @@
 
     import  Stars from './_Stars.svelte';
     import { playerStore } from '$lib/playerStore';
+    import Play from 'svelte-icons/fa/FaPlay.svelte';
     export let song;
+    let track = song.name;
     let jams =  song.jams;
 
     jams.forEach(jam => {
@@ -32,8 +34,12 @@
     })
     jams.sort((a,b) => b.stars - a.stars);
 
-    function play(url) {
-        $playerStore.url = url;
+    function play(jam) {
+        $playerStore.url = jam.url;
+        $playerStore.playing = jam.show.info;
+        $playerStore.track = track;
+        $playerStore.isPlaying = true;
+
     }
 
 </script>
@@ -60,10 +66,10 @@
             <span>
                 <a sveltekit:prefetch
                    href='/explore/{song.band.name}/shows/jams/{jam.id}'> {jam.show.info} </a>
-                <button on:click={()=> $playerStore.url = jam.url} >Play</button>
+                <button on:click={() => play(jam)} class='icon'><Play /></button>
             </span>
-                <p>{jam.comments.length || 0} comments</p>
             </div>
+                <p>{jam.comments.length || 0} comments</p>
 
 
             <Stars rating={jam.stars} />
@@ -88,6 +94,9 @@
     p {
         color: #7c7d7d;
     }
+    a {
+        width: 100%;
+    }
     ul {
 
 
@@ -100,7 +109,7 @@
         justify-content: space-between;
         align-items:    center;
         color:           hsl(210, 33%, 93%);
-        margin:          10px auto;
+        margin:          0px auto;
 
     }
     h1 {
@@ -113,5 +122,31 @@
     h2 {
         font-size: 2.5ch;
         color:     hsl(0, 10%, 70%);
+    }
+    /* Smartphones (portrait) ———– */
+    @media only screen
+    and (max-width : 420px) {
+       ul {
+           width: 100%;
+           padding-inline-start: 0;
+       }
+        li {
+            display: flex;
+            flex-direction: column;
+            width: 100vw;
+        }
+    }
+    .icon {
+        background-color: inherit;
+        border: none;
+        color: green;
+        height: 32px;
+        width: 32px;
+    }
+
+    @media only screen and (max-width : 800px) {
+        h1 {
+            font-size: 1rem;
+        }
     }
 </style>

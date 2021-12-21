@@ -38,6 +38,7 @@
 
     ul {
         list-style-type: none;
+        padding-inline-start: 0px;
     }
 
     li {

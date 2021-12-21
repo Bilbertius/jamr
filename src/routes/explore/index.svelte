@@ -54,7 +54,7 @@
         padding:          2vh 2vw;
         border-radius:    15px;
 
-        width:            auto;
+        min-width:        min(100%,  50vh);
 
 
     }
@@ -121,7 +121,12 @@
         font-size: 1.9ch;
     }
 
-
+   @media only screen and (max-width :420px) {
+       #explore {
+           background-color: inherit;
+           box-shadow:  none;
+       }
+   }
 </style>
 
 

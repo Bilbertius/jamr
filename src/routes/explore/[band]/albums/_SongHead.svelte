@@ -5,10 +5,14 @@
     function hideJams() {
         hide = !hide;
     }
+
+
+
+
 </script>
 
 <li>
-    <div>
+    <div class='listhead'>
         <h4>
             {song.name}
         </h4>
@@ -18,7 +22,9 @@
         {#each song.jams as jam }
             <ul>
                 <li>
-                    {jam.show.info}</li>
+
+                    {jam.show.info}
+                </li>
             </ul>
         {/each}
     {/if}
@@ -62,6 +68,11 @@
     div {
         display:     flex;
         align-items: center;
+    }
+
+    .listhead {
+        display: flex;
+        justify-content: space-between;
     }
 
 </style>

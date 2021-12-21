@@ -8,7 +8,7 @@ export async function apiShow(request, resource, data) {
 
     let body = {};
     let status = 400;
-    console.log(request);
+
     switch (request.method.toUpperCase()) {
 
       // *********************** GET *************************//
