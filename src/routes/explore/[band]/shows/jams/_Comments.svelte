@@ -85,12 +85,14 @@
         width: auto;
     }
     article {
-
+        width: 60vw;
         overflow: scroll;
+        overflow-x: hidden;
         height: 40vh;
+        margin: 5px;
         padding: 40px 30px;
-        box-shadow: inset 6px 6px 6px hsla(0, 0%, 10%, 0.6), inset  -6px -6px 6px hsla(0, 0%, 70%, 0.6);
-        border-radius: 15px;
+        box-shadow: inset  4px 4px 8px hsla(0, 0%, 5%, 0.8), inset  -19px -4px 8px hsla(0, 0%, 60%, 0.6);
+        border-radius: 5px;
     }
 
     article::-webkit-scrollbar {
@@ -116,7 +118,7 @@
         flex-direction: column;
         height:         15vh;
 
-        gap:            25px;
+        gap:            15px;
 
 
     }
@@ -135,7 +137,7 @@
     }
 
     h2 {
-        color: #dfdede;
+        color: #969696;
     }
 
 
@@ -143,14 +145,12 @@
         display:        flex;
         align-items:    flex-start;
         flex-direction: column;
-
-        line-height:    2;
+        margin: 10px;
+        line-height:    1.5;
         border-radius:  15px;
 
-        box-shadow:     1px 1px 4px hsla(180, 0%, 10%, 0.6),
-                        -1px -1px 4px hsla(180, 0%, 60%, 0.6),
-                        inset -1px -1px 1px hsla(180, 0%, 10%, 0.6),
-                        inset 1px 1px 1px hsla(180, 0%, 60%, 0.6);;
+        box-shadow:     0px 4px 4px hsla(180, 0%, 5%, 0.8),
+                        0px -4px 4px hsla(180, 0%, 60%, 0.8);
     }
 
     .comment > p {
@@ -167,7 +167,7 @@
         display:                    flex;
         width:                      calc(100% - 50px);
         align-items:                center;
-        background-color:           #6a6a6a;
+        background-color:           #222727;
     }
 
     div.inputs {
@@ -179,11 +179,12 @@
     }
 
     textarea::placeholder {
-        color: #e6e6e6;
+        color: #b3b3b3;
     }
 
     input {
-        width:            40vw;
+        min-width: 200px;
+        max-width:        300px;
         margin-bottom:    0;
         padding:         5px;
         line-height:      2;
@@ -195,29 +196,30 @@
 
     textarea {
         background-color: hsla(180, 0%, 40%, 0.6);
-        box-shadow:     -4px -4px 4px hsla(180, 0%, 10%, 0.6),
-                        4px 4px 4px hsla(180, 0%, 60%, 0.6),
-                        inset 4px 4px 4px hsla(180, 0%, 10%, 0.6),
-                        inset -4px -4px 4px hsla(180, 0%, 60%, 0.6);
+        box-shadow:     -2px -2px 2px hsla(180, 0%, 10%, 0.6),
+                        2px 2px 2px hsla(180, 0%, 60%, 0.6),
+                        inset 2px 2px 2px hsla(180, 0%, 10%, 0.6),
+                        inset -2px -2px 2px hsla(180, 0%, 60%, 0.6);
         border-radius:    5px;
         outline:          none;
         padding:          5px 15px;
-        color:            #c7c5c5;;
+        color:            #c7c5c5;
         border:           none;
-        font-size:        1.2rem;
+        font-size:        1rem;
 
 
     }
 
     input[type='submit'] {
-        margin: 0 auto 15px;
+        font-size : 1rem;
+        margin: 0 auto 5px;
         background-color: hsl(0, 0%, 30%);
     }
     h1 {
         color: #7c7d7d;
     }
 
-    @media only screen and (min-width:  800px) {
+    @media only screen and (max-width: 1424px) {
         article {
             width: 80vw;
         }
@@ -229,8 +231,25 @@
             font-size: 1.2rem;
         }
         article {
-            width: 300px;
+            height: 30vw;
         }
-        textarea { width:300px;}
+
+        .comment {
+            line-height: 1.2;
+        }
+        button {
+            height: 60px;
+        }
+        .user-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: flex-start;
+        }
+        h3,h2, p  {
+            margin: 5px;
+            font-size: .8rem;
+
+        }
     }
 </style>

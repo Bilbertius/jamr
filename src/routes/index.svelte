@@ -10,9 +10,11 @@
 <svelte:head>
     <title>Home</title>
 </svelte:head>
+<section>
 
 <img src='../../static/onlyjamsdark.png'
-     alt=''>
+     alt='only jams'>
+</section>
 
 <style>
     section {
@@ -24,15 +26,11 @@
     }
 
 
-
-    h1 {
-        width: 100%;
-        font-size: 9ch;
-    }
     img {
         margin: 20vh 10vw;
         max-width: 80vw;
         border-radius: 50px;
         box-shadow: var(--neumorph-deep);
+        transition:ease-in;
     }
 </style>

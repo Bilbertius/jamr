@@ -4,7 +4,6 @@
 		let band = page.params.band;
 		const res = await fetch(`/explore/${band}/shows.json`).then((res) => res.json())
 
-
 			return {
 				props: { band : res}
 			};
@@ -15,13 +14,17 @@
 <script>
 	import ShowHead from './_ShowHead.svelte';
 
-	export let band;
 
+	export let band;
+    let shows = [...band.shows];
+    shows = shows.sort((a,b) => b.date = a. date);
+    let sorted = [...shows];
+    console.log(sorted);
 
 </script>
 
 <ul>
-	{#each band.shows as show (show.id)}
+	{#each sorted as show (show.id)}
 		<ShowHead {show} band={band.name}/>
 	{/each}
 </ul>

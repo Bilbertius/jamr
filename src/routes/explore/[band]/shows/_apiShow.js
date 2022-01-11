@@ -1,8 +1,4 @@
-import { PrismaClient } from '@prisma/client';
-
-
-const prisma = new PrismaClient();
-
+import prisma from '$lib/client';
 
 export async function apiShow(request, resource, data) {
 
@@ -19,6 +15,7 @@ export async function apiShow(request, resource, data) {
                     shows: {
                         select: {
                             id: true,
+                            date: true,
                             info: true,
                             jams: {
                                 select: {
@@ -48,8 +45,7 @@ export async function apiShow(request, resource, data) {
             break;
 
       // *********************** Post *************************//
-        case
-        'POST':
+        case'POST':
             body = await prisma.comment.create({
                 data: {
 

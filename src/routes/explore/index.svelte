@@ -35,11 +35,6 @@
     let bandShow = false;
     let id;
 
-    function addSong(albumId) {
-        id = albumId;
-        show = true;
-
-    }
 
 
 </script>
@@ -76,7 +71,7 @@
 
     }
 
-    ul#song > li {
+    ul#song > a > li {
         box-shadow:    1px 1px 1px 1px hsla(0, 0%, 10%, 0.7), -1px -1px 1px 0px hsla(0, 0%, 50%, 0.7), inset 0px -1px 0px 0px hsla(0, 0%, 10%, 0.7), inset 0px 1px 0px 0px hsla(0, 0%, 40%, 0.7);
         margin:        6px auto;
         padding:       1px 5px;
@@ -84,10 +79,16 @@
 
     }
 
-    ul#song > li:hover {
-        background-color: hsl(150, 0%, 30%);
-    }
 
+    ul#song > a > li:hover {
+        background-color:  hsla(210, 90%, 60%, 0.7);
+        color: purple;
+        box-shadow:    1px 1px 1px 1px hsla(210, 60%, 10%, 0.9), -1px -1px 1px 0px hsla(210, 70%, 70%, 0.9), inset 0px -1px 0px 0px hsla(210, 60%, 70%, 0.9), inset 0px 1px 0px 0px hsla(210, 60%, 10%, 0.9);
+        text-decoration: none;
+    }
+     ul#song > a {
+         text-decoration: none;
+     }
     ul#album {
         color: white;
     }
@@ -103,28 +104,21 @@
 
     }
 
-    button {
-        background-color: inherit;
-        color:            white;
-        border:           none;
-        margin-left:      10px;
-        border-radius:    50%;
-        box-shadow:       3px 3px 1px 1px hsla(0, 0%, 10%, 0.7), -3px -3px 1px 0px hsla(0, 0%, 50%, 0.7), inset 0px -1px 0px 0px hsla(0, 0%, 10%, 0.7), inset 0px 1px 0px 0px hsla(0, 0%, 40%, 0.7);
-    }
-
-    button:active {
-        box-shadow: inset 2px 2px 2px 2px hsla(176, 0%, 5%, 0.9), inset -2px -2px 2px 2px hsla(176, 0%, 54%, 0.9);
-    }
+    
 
     h4 {
         color:     hsl(176, 100%, 84%);
         font-size: 1.9ch;
     }
 
-   @media only screen and (max-width :420px) {
+   @media only screen and (max-width: 420px) {
+
        #explore {
            background-color: inherit;
            box-shadow:  none;
+       }
+       ul#song > a > li  {
+            font-size: .8rem;
        }
    }
 </style>
@@ -146,19 +140,16 @@
                     {#each band.albums as album }
                         <li id='album-li'>
                             <p>{album.name}</p>
-                            <button type='button'
-                                    on:click={()=> addSong(album.id)}>+
-                            </button>
-
                         </li>
                         <ul id='song'>
                             {#each album.songs as song}
-                                <li>
+                               
                                     <a sveltekit:prefetch
                                        href='explore/{band.name}/songs/{song.id}'>
+                                       <li class="jam">
                                         {song.name}
-                                    </a>
                                 </li>
+                            </a>
                             {/each}
                         </ul>
                     {/each}

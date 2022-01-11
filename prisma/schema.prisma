@@ -20,6 +20,8 @@ enum Role {
 }
 
 
+
+
 model UserProfile {
     id                  String       @id @default(cuid())
     created_at          DateTime     @default(now())
@@ -28,19 +30,20 @@ model UserProfile {
     role                Role         @default(USER)
     votes               Vote[]
     comments            Comment[]
-    followedBy          Follows[]   @relation("followed")
-    followerOf            Follows[]   @relation("follower")
+    followers           Follows[] @relation("follower")
+    following           Follows[] @relation("following")
 
     }
 
 model Follows {
-  follower    UserProfile @relation("follower", fields: [followerId], references: [id])
-  followerId  String
-  followed   UserProfile @relation("followed", fields: [followedUsername], references: [username])
-  followedUsername String
+  follower              UserProfile @relation("follower", fields: [followerId], references: [id])
+  followerId            String
+  following             UserProfile @relation("following", fields: [followingId], references: [id])
+  followingId           String
 
-  @@id([followerId, followedUsername])
+  @@id([followerId, followingId])
 }
+
 model Musician {
     id                  String      @id @default(cuid())
     first_name          String
@@ -79,7 +82,7 @@ model Song {
     album               Album?      @relation(fields: [albumId], references: [id])
     albumId             String?
     jams                Jam[]
-    trckNumber          Int?
+
 }
 
 model Show {
@@ -103,6 +106,7 @@ model Jam {
     votes               Vote[]
     comments            Comment[]
     url                 String?      @default("")
+    trackNumber         Int?
 
     }
 

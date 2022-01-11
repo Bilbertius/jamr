@@ -36,8 +36,8 @@ export async function apiUser(request, resource, data) {
 						}
 					},
 					votes: true,
-					followedBy: true,
-					followerOf: true
+					followers: true,
+					following: true
 				}
 			});
 

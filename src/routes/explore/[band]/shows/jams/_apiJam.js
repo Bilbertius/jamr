@@ -1,7 +1,4 @@
-import { PrismaClient } from '@prisma/client';
-
-
-const prisma = new PrismaClient();
+import prisma from '$lib/client';
 
 
 export async function apiJam(request, resource, data) {
@@ -20,6 +17,7 @@ export async function apiJam(request, resource, data) {
                     song: true,
                     show: true,
                     url: true,
+                    features: true,
                     votes: {
                         select: {
                             rating: true,
@@ -40,7 +38,7 @@ export async function apiJam(request, resource, data) {
                 }
             });
             status = 200;
-            console.log(body)
+
             break;
 
       // *********************** Post *************************//
@@ -67,7 +65,7 @@ export async function apiJam(request, resource, data) {
         return {
             status: 303,
             headers: {
-                location: '/explore'
+                location: `/explore/Papadosio/shows/jams/${request.params.jamId}`
             }
         };
     } else {

@@ -17,24 +17,25 @@
 <script>
     import StarRating from 'svelte-star-rating';
     import VoteInput from './_VoteInput.svelte';
+    import { vStore, rating } from '$lib/voteStore';
+
     export let votes;
     export let jamId;
 
-    let tally = 0;
-    let len = votes.length;
-    let i;
-    $: for (i = 0; i<len; i++) {
-        tally += votes[i].rating;
-    }
-    $:rating = tally / len || 0;
+
+    $vStore = votes;
+
+
+
+
 
 
 
 </script>
 
 <div>
-    <StarRating {rating}/>
-    <VoteInput {jamId} {votes} />
+    <StarRating rating={$rating}/>
+    <VoteInput  {jamId} votes={$vStore} />
 
 </div>
 
@@ -42,6 +43,6 @@
 <style>
     div {
         display: flex;
-        justify-content: space-between;
+        justify-content: space-around;
     }
 </style>

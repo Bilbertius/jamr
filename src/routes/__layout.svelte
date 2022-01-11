@@ -18,9 +18,10 @@
     }
 </script>
 <script>
+
     import Header from '$lib/header/Header.svelte';
     import '../app.css';
-
+    import AudioControls from '$lib/_AudioControls.svelte';
 </script>
 
 
@@ -31,6 +32,7 @@
     <slot/>
 
 </main>
+<AudioControls />
 <footer>
     <p>Made by
         <a href='https://will-macneil.now.sh'> Will</a>
@@ -46,8 +48,8 @@
         flex-direction: column;
         align-items: center;
         padding-bottom: 3rem;
-        width:          100vw;
-        min-height:     calc(100vh - 3em);
+        width:          calc(100vw - 15px);
+        min-height:     calc(100vh - 15rem);
 
         margin:         0 auto;
         box-sizing:     border-box;
@@ -60,12 +62,15 @@
         position: relative;
         bottom: 0;
         height: 3rem;
-        width: calc(100vw);
+        width: calc(100vw - 15px);
         display:         flex;
         flex-direction:  row;
         justify-content: center;
         align-items:     center;
 
+    }
+    footer p {
+        color: #d0dde9;
     }
 
     footer a {
@@ -75,6 +80,16 @@
     @media (max-width: 480px) {
         main {
             padding: 0.2em;
+        }
+    }
+
+    @media only screen and (max-width: 420px) {
+        footer {
+            height: 2rem;
+        }
+        main {
+            min-height: calc(100vh - 10rem);
+
         }
     }
 </style>

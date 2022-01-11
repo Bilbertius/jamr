@@ -1,8 +1,4 @@
-import { PrismaClient } from '@prisma/client';
-
-
-const prisma = new PrismaClient();
-
+import prisma from '$lib/client';
 
 export async function apiVote(request, resource, data) {
 
@@ -49,6 +45,7 @@ export async function apiVote(request, resource, data) {
             });
 
             status = 201;
+
             break;
     }
 
@@ -56,7 +53,7 @@ export async function apiVote(request, resource, data) {
         return {
             status: 303,
             headers: {
-                location: `./${request.params.jamId}`
+                location: `/explore/Papadosio/shows/jams/${request.params.jamId}`
             }
         };
     } else {

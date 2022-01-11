@@ -33,13 +33,14 @@
 
     export let user;
     $userStore = { ...user };
+    $:console.log($userStore);
+    let data;
     $:data = $userStore;
 
     let isLogged = false;
     let newUser = {
         username: ''
     };
-
 
 
 </script>
@@ -49,20 +50,30 @@
         {user.username}
     </h1>
     <div class='follow'>
-
-    <h2>You follow {user.followerOf.length || '0'} users</h2>
-    <h2>You are followed by {user.followedBy.length || '0'} users</h2>
+        {#if user.followerOf}
+            <h2>You follow {user.followedBy.length  || '0'} users</h2>
+        {/if }
+        {#if user.followedBy}
+            <h2>You are followed by {user.followerOf.length || '0'} users</h2>
+        {/if}
     </div>
     <ul>
         {#if user.comments.length > 0}
             {#each user.comments as comment}
                 <li><p>
+                    <span class="song"> 
+                        {comment.jam.song.name}
+                    </span>
+                    
+                    
+                  
+                        <br />
+                        
+                    {comment.jam.show.info}
 
-                    {comment.text}
                 </p>
                     <p class='info'>
-                        {comment.jam.song.name}<br />
-                    {comment.jam.show.info}
+                    {comment.text}
                     </p>
                 </li>
 
@@ -139,10 +150,20 @@
     }
     ul {
         list-style-type: none;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-evenly;
+        align-content: center;
     }
     li{
         color: #e7edf3;
         font-size: 1.2rem;
+        box-shadow: -5px 5px 5px 0 hsla(0, 0%, 10%, 0.7),5px -5px 5px 0 hsla(0, 0%, 60%, 0.7),
+        inset 2px -2px 4px 0 hsla(0, 0%, 10%, 0.7), inset -2px 2px 4px 0 hsla(0, 0%, 60%, 0.7);
+        border-radius: 20px;
+        padding: 5px;
+        margin: 30px;
+        flex: 1;
     }
 
     label {
@@ -177,11 +198,15 @@
 
     p {
         color: #e7edf3;
+        font-size:    1.2rem;
+        margin :35px;
     }
-
+    .song {
+        color: rgb(173, 202, 221);
+    }
 
     p.info   {
         color: #bbbbbb;
-        font-size: .9rem;
+        font-size: 1rem;
     }
 </style>

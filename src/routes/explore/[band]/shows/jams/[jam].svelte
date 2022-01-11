@@ -20,26 +20,41 @@
     import Comments from './_Comments.svelte';
     import Vote from './_Vote.svelte';
     import {playerStore} from '$lib/playerStore';
-    import Play from 'svelte-icons/fa/FaPlay.svelte';
+    import PlayButton from '$lib/PlayButton.svelte';
+    import { vStore } from '$lib/voteStore';
+   
+
+
     export let jam;
     let jamId = jam.id;
-
     let votes = jam.votes;
+
+    $vStore = [...votes];
+
+
+
+
 
     function play() {
         $playerStore.url = jam.url;
         $playerStore.playing = jam.show.info;
         $playerStore.track = jam.song.name;
         $playerStore.isPlaying = true;
-        console.log($playerStore);
     }
 
+
 </script>
+<svelte:head>
+    <title>
+        {jam.song.name} - {jam.show.info}
+    </title>
+</svelte:head>
 
 <div>
-    <h1>{jam.song.name} <br /> {jam.show.info}</h1>
+    <h1>{jam.song.name} {jam.features} <br /> {jam.show.info} </h1>
 
-    <button on:click={() => play()}> <Play /> </button>
+    <PlayButton {jam} on:playsong/>
+  
     <Vote {votes} {jamId} />
 
     <Comments {jam} />
@@ -59,14 +74,18 @@
         flex-flow: column nowrap;
     }
     button {
-        padding :15px;
-        width: 50px;
-        border-radius: 50%;
-        border: none;
-        color: green;
-        background-color: var(--text-color);
-        font-size: 1.5rem;
-        align-self: center;
+        padding :         15px;
+        width:            50px;
+        border-radius:    50%;
+        border:           none;
+        color:            #7ee07e;
+        background-color: inherit;
+        font-size:        1rem;
+        align-self:       center;
+    }
+
+    button:hover {
+        color: #159515;
     }
 
     @media only screen and (max-width: 420px) {
@@ -76,7 +95,7 @@
     }
     @media only screen and (max-width : 800px) {
         h1 {
-            font-size: 1rem;
+            font-size: 1.2rem;
         }
     }
 </style>

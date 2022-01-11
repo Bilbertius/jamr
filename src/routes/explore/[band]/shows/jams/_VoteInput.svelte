@@ -1,13 +1,16 @@
 <script>
     import { enhance } from '$lib/form.js';
-    import { userStore } from '$lib/userData'
+    import { userStore } from '$lib/userData';
+    import { vStore, rating} from '$lib/voteStore';
+
+
     export let votes;
     export let jamId;
-    let jamVotes;
+    let stars = 0;
+
+    $:stars = $rating;
 
 
-
-    $:rating = 0;
 
 </script>
 
@@ -19,30 +22,48 @@
   method='post'
   use:enhance={{
 			result: async (res, form) => {
-				const vote = await res.json();
-				jamVotes = [...jamVotes, vote];
+			    //Assign the JSON response to newVote;
+				const newVote = await res.json();
+				//If this vote is the first for this jam then assign it to the vStore
+				if ($vStore.length === 0) {
+				    $vStore = [newVote];
+				} else {
+				//If not the first vote check to see if first user vote
+                    for( let i = 0;i < $vStore.length;i++) {
+                        if (newVote.user.username === $vStore[i].user.username) {
+                            //If user has already voted on this jam assign newVote to spot
+                            //in vStore array that held their previous vote
+                            $vStore[i] = newVote;
+                        } else {
+                            //if not first overall and first for user assign to vStore array and
+                            //spread the rest of the vStore array in with it
+                            $vStore = [...$vStore, newVote]
+                        }
+				    }
+                }
+				$vStore = [...$vStore];
+
 				$userStore = {
 				    ...$userStore,
-				     votes: [...$userStore.votes, vote]
+				     votes: [...$userStore.votes, newVote]
 				     }
-
 			}}}>
 
     <label>
         <input type='radio'
                name='rating'
-               bind:group={rating}
+               bind:group={stars}
                value={1}
-               onchange="this.form.submit()"
+               onchange="this.form.requestSubmit()"
         />
         <span class='icon'>★</span>
     </label>
     <label>
         <input type='radio'
                name='rating'
-               bind:group={rating}
+               bind:group={stars}
                value={2}
-               onchange="this.form.submit()"
+               onchange="this.form.requestSubmit()"
         />
         <span class='icon'>★</span>
         <span class='icon'>★</span>
@@ -50,9 +71,9 @@
     <label>
         <input type='radio'
                name='rating'
-               bind:group={rating}
+               bind:group={stars}
                value={3}
-               onchange="this.form.submit()"
+               onchange="this.form.requestSubmit()"
         />
         <span class='icon'>★</span>
         <span class='icon'>★</span>
@@ -61,9 +82,9 @@
     <label>
         <input type='radio'
                name='rating'
-               bind:group={rating}
+               bind:group={stars}
                value={4}
-               onchange="this.form.submit()"
+               onchange="this.form.requestSubmit()"
         />
         <span class='icon'>★</span>
         <span class='icon'>★</span>
@@ -73,9 +94,9 @@
     <label>
         <input type='radio'
                name='rating'
-               bind:group={rating}
+               bind:group={stars}
                value={5}
-               onchange="this.form.submit()"
+               onchange="this.form.requestSubmit()"
         />
         <span class='icon'>★</span>
         <span class='icon'>★</span>

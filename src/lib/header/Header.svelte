@@ -4,6 +4,7 @@
     import { store as authStore, logout } from '../auth.js';
 
 
+
     $:auth = $authStore;
 
     function handleLogout() {
@@ -65,19 +66,26 @@
     header {
         display:         flex;
         justify-content: space-around;
-        position: fixed;
-        left: 35vw;
-        width:30vw;
-        z-index: 9999;
-        margin-bottom: 50px;
+        position:        fixed;
+        left:            35vw;
+        width:           30vw;
+        z-index:         9999;
+        margin-bottom:   50px;
 
     }
 
+    .vert-center {
+        width: 20vw;
+        display:         flex;
+        justify-content: center;
+
+    }
 
     nav {
         display:         flex;
         justify-content: center;
-        --background:    hsla(0, 40%, 100%, 0.7);
+        --background:    var(--accent-color);
+    ;
     }
 
     svg {
@@ -87,7 +95,7 @@
     }
 
     path {
-        fill: var(--background);
+        fill: var(--accent-color);
     }
 
     ul {
@@ -99,7 +107,8 @@
         justify-content: center;
         align-items:     center;
         list-style:      none;
-        background:      var(--background);
+        background:      var(--accent-color);
+
         background-size: contain;
     }
 

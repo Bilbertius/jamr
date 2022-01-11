@@ -39,4 +39,7 @@
   ul {
     list-style-type: none;
   }
+  section {
+      width: 90vw;
+  }
 </style>

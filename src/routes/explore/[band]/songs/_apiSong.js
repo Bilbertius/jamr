@@ -1,8 +1,4 @@
-import { PrismaClient } from '@prisma/client';
-
-
-const prisma = new PrismaClient();
-
+import prisma from '$lib/client';
 
 export async function apiSong(request, resource, data) {
     /*if (!request.locals.userid) {
@@ -30,7 +26,8 @@ export async function apiSong(request, resource, data) {
                             url: true,
                             show: {
                                 select: {
-                                    info: true
+                                    info: true,
+                                    date: true
                                 }
                             },
                             votes: true,

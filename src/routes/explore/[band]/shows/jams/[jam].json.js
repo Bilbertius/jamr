@@ -20,7 +20,7 @@ export const post = async (request) => {
 		userid: request.locals.user.issuer,
 		text: request.body.get('text')
 	});
-	console.log(response);
+
 	return response;
 };
 

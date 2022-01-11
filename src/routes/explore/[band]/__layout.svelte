@@ -3,7 +3,7 @@
 
 
     const { band } = $page.params;
-    import AudioPlayer from'$lib/_AudioPlayer.svelte';
+
 
 </script>
 
@@ -21,27 +21,27 @@
     </ul>
 </nav>
 <section>
-    <AudioPlayer />
     <slot></slot>
 </section>
 <style>
     section {
         display: flex;
         flex-direction: column;
+        justify-content: space-between;
         align-items:center;
-        width: 80vw;
+        width: 95vw;
     }
     nav {
         display:        flex;
         flex-direction: column;
 
-        width:          100%;
+        width:          50%;
     }
 
     ul {
         margin-top:           100px;
         display:              flex;
-        justify-content:      space-around;
+        justify-content:      space-between;
         align-items:          flex-end;
         list-style-type:      none;
         padding-inline-start: 0;
@@ -58,4 +58,12 @@
         color: white;
 
     }
+
+    @media only screen and (max-width: 420px) {
+        ul {
+            margin-top: 40px;
+        }
+    }
+
+
 </style>

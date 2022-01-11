@@ -1,25 +1,17 @@
-
-
-import { PrismaClient } from '@prisma/client';
-const prisma = new PrismaClient();
+import prisma from '$lib/client.js';
 
 
 export async function apiProfile(request, resource, data) {
     let body = {};
     let status = 400;
-
+   
     switch (request.method.toUpperCase()) {
         case 'DELETE':
-            await prisma.follows.delete({
+            body = await prisma.follows.delete({
                 where: {
-                    followed: {
-                        connect: {
-                            username:  resource.split('/').pop()
-                        },
-                    }, follower: {
-                        connect : {
-                            id : data.follower,
-                        }
+                    followerId_followingId: {
+                        followerId: resource.split('/')[2],
+                        followingId: resource.split('/')[1]
                     }
                 }
             });
@@ -28,19 +20,18 @@ export async function apiProfile(request, resource, data) {
         case 'GET':
             body = await prisma.userProfile.findUnique({
                 where: {
-                    username:  resource.split('/').pop()
+                    username: resource.split('/').pop()
                 },
                 select: {
-                    id:true,
+                    id: true,
                     username: true,
                     comments: {
                         include: {
                             jam: {
-                               include : {
-                                   show: true
-                               }
-                            },
-
+                                include: {
+                                    show: true
+                                }
+                            }
                         }
                     },
                     votes: {
@@ -48,41 +39,34 @@ export async function apiProfile(request, resource, data) {
                             jam: {
                                 include: {
                                     show: true
-
                                 }
-                            },
-
+                            }
                         }
                     },
-                    followerOf: true,
-                    followedBy: true
-
-
+                    followers: {
+                        include: {
+                            follower: true
+                        }
+                    },
+                    following: {
+                        include: {
+                            following: true
+                        }
+                    }
                 }
             });
 
             status = 200;
             break;
-
         case 'POST':
             body = await prisma.follows.create({
                 data: {
-                    followed: {
-                        connect: {
-                            username:  resource.split('/').pop()
-
-                        },
-                    }, follower: {
-                        connect : {
-                            id : data.follower,
-                        }
-
-                    }
+                    followerId: data.follower,
+                    followingId: data.following
                 },
-                include: {
-                    follower:true,
-                    followed: true
-
+                select: {
+                    followerId: true,
+                    followingId: true
                 }
             });
             status = 200;

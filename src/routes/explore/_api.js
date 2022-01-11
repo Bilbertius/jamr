@@ -1,7 +1,4 @@
-import { PrismaClient } from "@prisma/client";
-
-const prisma= new PrismaClient();
-
+import prisma from '$lib/client';
 
 export async function api(request, resource, data) {
   /*if (!request.locals.userid) {

@@ -34,10 +34,12 @@
         color: #7db083;
     }
     p {
-        color: #e7edf3;
+        color:     #c7c7c7;
         font-size: 2.3ch;
     }
     em  {
-        color: #e7edf3;
+        color: #949494;
     }
+
+
 </style>
