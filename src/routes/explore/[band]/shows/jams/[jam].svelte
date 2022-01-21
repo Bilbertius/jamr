@@ -35,12 +35,6 @@
 
 
 
-    function play() {
-        $playerStore.url = jam.url;
-        $playerStore.playing = jam.show.info;
-        $playerStore.track = jam.song.name;
-        $playerStore.isPlaying = true;
-    }
 
 
 </script>
@@ -51,9 +45,9 @@
 </svelte:head>
 
 <div>
-    <h1>{jam.song.name} {jam.features} <br /> {jam.show.info} </h1>
+    <h1>{jam.song.name} {jam.features ? jam.features : ''} <br /> {jam.show.info} </h1>
 
-    <PlayButton {jam} on:playsong/>
+    <PlayButton {jam} />
   
     <Vote {votes} {jamId} />
 
@@ -73,20 +67,7 @@
         display: flex;
         flex-flow: column nowrap;
     }
-    button {
-        padding :         15px;
-        width:            50px;
-        border-radius:    50%;
-        border:           none;
-        color:            #7ee07e;
-        background-color: inherit;
-        font-size:        1rem;
-        align-self:       center;
-    }
 
-    button:hover {
-        color: #159515;
-    }
 
     @media only screen and (max-width: 420px) {
         h1 {

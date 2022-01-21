@@ -3,6 +3,6 @@ node_modules
 .env
 
 /prisma/docs
-/prisma/seed.js
+/prisma/seedy.js
 /prisma/shows.js
 /prisma/tracklists.js

@@ -54,7 +54,7 @@
         >
 
             <button class='submit'
-                    aria-label='Follow {profile.username}'>Follow
+                    aria-label='Follow {profile.username}'> Follow
             </button>
         </form>
     {/if}
@@ -76,6 +76,7 @@
             </button>
         </form>
     {/if}
+
     <h2>User Comments</h2>
     <ul>
         {#if profile.comments && profile.comments.length > 0}
@@ -106,23 +107,46 @@
 
     ul {
         list-style-type: none;
-        padding-inline-start: 0px;
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: space-around;
+        align-content: center;
+    }
+    li{
+        color: #e7edf3;
+        font-size: 1.2rem;
+        box-shadow: -5px 5px 5px 0 hsla(0, 0%, 10%, 0.7),5px -5px 5px 0 hsla(0, 0%, 60%, 0.7),
+               inset 2px -2px 4px 0 hsla(0, 0%, 10%, 0.7), inset -2px 2px 4px 0 hsla(0, 0%, 60%, 0.7);
+        border-radius: 20px;
+        padding: 5px;
+        margin: 20px;
+        flex: 1 1 400px;
+        min-width: 400px;
     }
 
-    li {
-        background-color: #577cad;
-
-        border-radius:    30px;
-    }
 
     button {
         background-color: inherit;
         color: var(--accent-color);
+        box-shadow: -2px 2px 4px 0 hsla(0, 0%, 10%, 0.7),2px -2px 4px 0 hsla(0, 0%, 40%, 0.7),
+                    inset 2px -2px 4px 0 hsla(0, 0%, 10%, 0.7), inset -2px 2px 4px 0 hsla(0, 0%, 40%, 0.7);
         border: none;
         padding : 20px;
-        font-size:1.4rem;
+        font-size:1.1rem;
+        border-radius: 20px;
+        cursor : pointer;
+        width: 100px;
 
-    ;
+    }
+
+    button:hover {
+        color: mediumpurple;
+        background-color: hsl(0,0%,22%);
+    }
+    button:active {
+        box-shadow: inset -2px 2px 4px 0 hsla(0, 0%, 8%, 0.7),inset 2px -2px 4px 0 hsla(0, 0%, 40%, 0.7), 2px -2px
+                    4px 0 hsla(0, 0%, 8%, 0.7), -2px 2px 4px 0 hsla(0, 0%, 40%, 0.7);
+        background-color: hsl(0,0%,18%);
     }
 
     span {

@@ -1,14 +1,18 @@
 <script>
-    import { createEventDispatcher } from 'svelte';
+
     import Play from 'svelte-icons/fa/FaPlay.svelte';
+    import { playerStore } from './playerStore.js';
+
+
     export let jam;
 
-    const dispatch = createEventDispatcher();
 
     function handleClick(e) {
-        dispatch('playsong', {
-            url: jam.url,
-        })
+        e.preventDefault();
+        $playerStore.url = jam.url;
+        $playerStore.track = jam.song.name;
+        $playerStore.playing = jam.show.info;
+        $playerStore.isPlaying = true;
     }
 
 </script>
@@ -23,13 +27,12 @@
 </div>
 
 <style>
-
 .container { 
     display: flex;
     justify-content: space-around;
+    margin: 5px;
     
 }
-
 
 .icon {
     background-color: inherit;

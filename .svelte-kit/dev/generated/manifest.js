@@ -9,7 +9,6 @@ const c = [
 	() => import("../../../src/routes/explore/[band]/shows/index.svelte"),
 	() => import("../../../src/routes/explore/[band]/shows/jams/[jam].svelte"),
 	() => import("../../../src/routes/explore/[band]/songs/[song].svelte"),
-	() => import("../../../src/routes/todos/index.svelte"),
 	() => import("../../../src/routes/auth.svelte"),
 	() => import("../../../src/routes/prof/[profile]/index.svelte"),
 	() => import("../../../src/routes/[user]/index.svelte")
@@ -60,23 +59,14 @@ export const routes = [
 	// src/routes/explore/[band]/songs/[song].svelte
 	[/^\/explore\/([^/]+?)\/songs\/([^/]+?)\/?$/, [c[0], c[4], c[9]], [c[1]], (m) => ({ band: d(m[1]), song: d(m[2])})],
 
-	// src/routes/todos/index.json.js
-	[/^\/todos\.json$/],
-
-	// src/routes/todos/index.svelte
-	[/^\/todos\/?$/, [c[0], c[10]], [c[1]]],
-
-	// src/routes/todos/[uid].json.js
-	[/^\/todos\/([^/]+?)\.json$/],
-
 	// src/routes/auth.svelte
-	[/^\/auth\/?$/, [c[0], c[11]], [c[1]]],
+	[/^\/auth\/?$/, [c[0], c[10]], [c[1]]],
 
 	// src/routes/prof/[profile]/index.json.js
 	[/^\/prof\/([^/]+?)\.json$/],
 
 	// src/routes/prof/[profile]/index.svelte
-	[/^\/prof\/([^/]+?)\/?$/, [c[0], c[12]], [c[1]], (m) => ({ profile: d(m[1])})],
+	[/^\/prof\/([^/]+?)\/?$/, [c[0], c[11]], [c[1]], (m) => ({ profile: d(m[1])})],
 
 	// src/routes/api/auth/logout.js
 	[/^\/api\/auth\/logout\/?$/],
@@ -91,7 +81,7 @@ export const routes = [
 	[/^\/([^/]+?)\.json$/],
 
 	// src/routes/[user]/index.svelte
-	[/^\/([^/]+?)\/?$/, [c[0], c[13]], [c[1]], (m) => ({ user: d(m[1])})]
+	[/^\/([^/]+?)\/?$/, [c[0], c[12]], [c[1]], (m) => ({ user: d(m[1])})]
 ];
 
 // we import the root layout/error components eagerly, so that

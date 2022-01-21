@@ -30,6 +30,11 @@ export async function apiSong(request, resource, data) {
                                     date: true
                                 }
                             },
+                            song: {
+                                select : {
+                                    name: true
+                                }
+                            },
                             votes: true,
                             comments: true,
 

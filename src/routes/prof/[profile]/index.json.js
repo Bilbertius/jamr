@@ -31,7 +31,7 @@ export const post = async (request) => {
 export const del = async (request) => {
     let { profile } = request.params;
 
-    return await apiProfile(request, `prof/${profile}/${request.locals.user.issuer}`);
+    return await apiProfile(request, `/prof/${profile}/${request.locals.user.issuer}`);
 
   
 };

@@ -36,13 +36,6 @@
     });
     jams.sort((a, b) => b.stars - a.stars);
 
-    function handlePlay(jam) {
-        $playerStore.url = jam.url;
-        $playerStore.playing = jam.show.info;
-        $playerStore.track = track;
-        $playerStore.isPlaying = true;
-
-    }
 
 
 
@@ -68,7 +61,7 @@
         <li class="jam">
             <div class='jaminfo'>
 
-                <PlayButton {jam} />
+                <PlayButton {jam}/>
                 <a sveltekit:prefetch
                    href='/explore/{song.band.name}/shows/jams/{jam.id}'> {jam.show.info} </a>
 

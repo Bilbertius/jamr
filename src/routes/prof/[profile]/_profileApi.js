@@ -7,11 +7,11 @@ export async function apiProfile(request, resource, data) {
    
     switch (request.method.toUpperCase()) {
         case 'DELETE':
-            body = await prisma.follows.delete({
+                body = await prisma.follows.delete({
                 where: {
                     followerId_followingId: {
-                        followerId: resource.split('/')[2],
-                        followingId: resource.split('/')[1]
+                        followerId: resource.split('/')[3],
+                        followingId: resource.split('/')[2]
                     }
                 }
             });
@@ -43,22 +43,25 @@ export async function apiProfile(request, resource, data) {
                             }
                         }
                     },
-                    followers: {
-                        include: {
-                            follower: true
-                        }
+                    followers:{
+                        select : {
+                            followingId: true
+                        },
                     },
                     following: {
-                        include: {
-                            following: true
+                        select: {
+                            followerId: true
                         }
                     }
+
                 }
             });
 
             status = 200;
             break;
         case 'POST':
+
+
             body = await prisma.follows.create({
                 data: {
                     followerId: data.follower,

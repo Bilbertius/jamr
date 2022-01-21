@@ -2,7 +2,7 @@
   "name": "Jamr",
   "version": "0.0.1",
   "prisma": {
-    "seed": "node prisma/seed.js"
+    "seed": "node prisma/seedy.js"
   },
   "scripts": {
     "dev": "svelte-kit dev",
@@ -10,7 +10,7 @@
     "preview": "svelte-kit preview",
     "lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. .",
     "format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. .",
-    "seed": "node prisma/seed.js"
+    "seed": "node prisma/seedy.js"
   },
   "devDependencies": {
     "@sveltejs/kit": "next",

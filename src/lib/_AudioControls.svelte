@@ -16,19 +16,19 @@
 <div>
 
     <p>
-        {isPlaying && playing ? track + ' ' + playing : 'No track selected'}
+        {isPlaying && playing ? track + ' - ' + playing : 'No track selected'}
     </p>
+
     <span>
     <AudioControls
     
       src={url}
-      autoplay
+
       display={true}
-      iconColor='aquamarine'
-      backgroundColor='hsla(0,0%, 20%, 1)'
+      iconColor='aqua'
+      backgroundColor='hsla(0,0%, 20%, .9)'
       barPrimaryColor='darkgrey'
       barSecondaryColor='grey'
-
     >
     </AudioControls>
     </span>

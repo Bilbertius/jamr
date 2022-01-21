@@ -84,11 +84,6 @@
 
 
 
-
-
-
-
-
 {#if !user.username && !isLogged}
     <h2>Finish Sign Up</h2>
     <form
@@ -152,7 +147,7 @@
         list-style-type: none;
         display: flex;
         flex-flow: row wrap;
-        justify-content: space-evenly;
+        justify-content: space-around;
         align-content: center;
     }
     li{
@@ -162,14 +157,11 @@
         inset 2px -2px 4px 0 hsla(0, 0%, 10%, 0.7), inset -2px 2px 4px 0 hsla(0, 0%, 60%, 0.7);
         border-radius: 20px;
         padding: 5px;
-        margin: 30px;
-        flex: 1;
-    }
+        margin: min(10vw, 50px);
+        flex: 2 1 40vw;
 
-    label {
-        color: #d0dde9;
 
-        width: 6vw;
+
     }
 
     input {
